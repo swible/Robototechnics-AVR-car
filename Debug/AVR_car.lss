@@ -1,0 +1,269 @@
+
+AVR_car.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000014c  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000003  00800060  00800060  000001c0  2**0
+                  ALLOC
+  2 .stab         00000684  00000000  00000000  000001c0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000cf7  00000000  00000000  00000844  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .comment      00000030  00000000  00000000  0000153b  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	29 c0       	rjmp	.+82     	; 0x54 <__ctors_end>
+   2:	00 00       	nop
+   4:	37 c0       	rjmp	.+110    	; 0x74 <__bad_interrupt>
+   6:	00 00       	nop
+   8:	35 c0       	rjmp	.+106    	; 0x74 <__bad_interrupt>
+   a:	00 00       	nop
+   c:	33 c0       	rjmp	.+102    	; 0x74 <__bad_interrupt>
+   e:	00 00       	nop
+  10:	31 c0       	rjmp	.+98     	; 0x74 <__bad_interrupt>
+  12:	00 00       	nop
+  14:	2f c0       	rjmp	.+94     	; 0x74 <__bad_interrupt>
+  16:	00 00       	nop
+  18:	2d c0       	rjmp	.+90     	; 0x74 <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	2b c0       	rjmp	.+86     	; 0x74 <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	29 c0       	rjmp	.+82     	; 0x74 <__bad_interrupt>
+  22:	00 00       	nop
+  24:	38 c0       	rjmp	.+112    	; 0x96 <__vector_9>
+  26:	00 00       	nop
+  28:	25 c0       	rjmp	.+74     	; 0x74 <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	23 c0       	rjmp	.+70     	; 0x74 <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	21 c0       	rjmp	.+66     	; 0x74 <__bad_interrupt>
+  32:	00 00       	nop
+  34:	1f c0       	rjmp	.+62     	; 0x74 <__bad_interrupt>
+  36:	00 00       	nop
+  38:	1d c0       	rjmp	.+58     	; 0x74 <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	1b c0       	rjmp	.+54     	; 0x74 <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	19 c0       	rjmp	.+50     	; 0x74 <__bad_interrupt>
+  42:	00 00       	nop
+  44:	17 c0       	rjmp	.+46     	; 0x74 <__bad_interrupt>
+  46:	00 00       	nop
+  48:	15 c0       	rjmp	.+42     	; 0x74 <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	13 c0       	rjmp	.+38     	; 0x74 <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	11 c0       	rjmp	.+34     	; 0x74 <__bad_interrupt>
+	...
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_clear_bss>:
+  60:	20 e0       	ldi	r18, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	01 c0       	rjmp	.+2      	; 0x6a <.do_clear_bss_start>
+
+00000068 <.do_clear_bss_loop>:
+  68:	1d 92       	st	X+, r1
+
+0000006a <.do_clear_bss_start>:
+  6a:	a3 36       	cpi	r26, 0x63	; 99
+  6c:	b2 07       	cpc	r27, r18
+  6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
+  70:	3f d0       	rcall	.+126    	; 0xf0 <main>
+  72:	6a c0       	rjmp	.+212    	; 0x148 <_exit>
+
+00000074 <__bad_interrupt>:
+  74:	c5 cf       	rjmp	.-118    	; 0x0 <__vectors>
+
+00000076 <_Z14configure_pinsv>:
+volatile bool check=false;
+
+void 
+configure_pins() 
+{ 
+	ENGINE_DIR |= _BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT); 
+  76:	81 b3       	in	r24, 0x11	; 17
+  78:	80 6a       	ori	r24, 0xA0	; 160
+  7a:	81 bb       	out	0x11, r24	; 17
+	ENGINE_PORT &= ~(_BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT)); 
+  7c:	82 b3       	in	r24, 0x12	; 18
+  7e:	8f 75       	andi	r24, 0x5F	; 95
+  80:	82 bb       	out	0x12, r24	; 18
+
+	DDRA = 0x00;
+  82:	1a ba       	out	0x1a, r1	; 26
+	INPUT_PIN = 0xFF;
+  84:	8f ef       	ldi	r24, 0xFF	; 255
+  86:	89 bb       	out	0x19, r24	; 25
+  88:	08 95       	ret
+
+0000008a <_Z15configure_timerv>:
+}
+
+void
+configure_timer()
+{
+	TCCR0 = _BV(CS02);
+  8a:	84 e0       	ldi	r24, 0x04	; 4
+  8c:	83 bf       	out	0x33, r24	; 51
+	TIMSK |= _BV(TOIE0);
+  8e:	89 b7       	in	r24, 0x39	; 57
+  90:	81 60       	ori	r24, 0x01	; 1
+  92:	89 bf       	out	0x39, r24	; 57
+  94:	08 95       	ret
+
+00000096 <__vector_9>:
+}
+
+ISR(TIMER0_OVF_vect)
+{
+  96:	1f 92       	push	r1
+  98:	0f 92       	push	r0
+  9a:	0f b6       	in	r0, 0x3f	; 63
+  9c:	0f 92       	push	r0
+  9e:	11 24       	eor	r1, r1
+  a0:	8f 93       	push	r24
+	if(!check)
+  a2:	80 91 60 00 	lds	r24, 0x0060
+  a6:	81 11       	cpse	r24, r1
+  a8:	1d c0       	rjmp	.+58     	; 0xe4 <__vector_9+0x4e>
+	{
+		check=true;
+  aa:	81 e0       	ldi	r24, 0x01	; 1
+  ac:	80 93 60 00 	sts	0x0060, r24
+		switch (z)
+  b0:	80 91 61 00 	lds	r24, 0x0061
+  b4:	81 30       	cpi	r24, 0x01	; 1
+  b6:	51 f0       	breq	.+20     	; 0xcc <__vector_9+0x36>
+  b8:	28 f0       	brcs	.+10     	; 0xc4 <__vector_9+0x2e>
+  ba:	82 30       	cpi	r24, 0x02	; 2
+  bc:	61 f0       	breq	.+24     	; 0xd6 <__vector_9+0x40>
+  be:	83 30       	cpi	r24, 0x03	; 3
+  c0:	79 f0       	breq	.+30     	; 0xe0 <__vector_9+0x4a>
+  c2:	10 c0       	rjmp	.+32     	; 0xe4 <__vector_9+0x4e>
+		{
+			case 0b00000000: // 00 - стоп
+				STOP;
+  c4:	82 b3       	in	r24, 0x12	; 18
+  c6:	8f 75       	andi	r24, 0x5F	; 95
+  c8:	82 bb       	out	0x12, r24	; 18
+			break;
+  ca:	0c c0       	rjmp	.+24     	; 0xe4 <__vector_9+0x4e>
+			case 0b0000001: // 01 - вправо
+				STOP; LEFT;
+  cc:	82 b3       	in	r24, 0x12	; 18
+  ce:	8f 75       	andi	r24, 0x5F	; 95
+  d0:	82 bb       	out	0x12, r24	; 18
+  d2:	97 9a       	sbi	0x12, 7	; 18
+			break;
+  d4:	07 c0       	rjmp	.+14     	; 0xe4 <__vector_9+0x4e>
+			case 0b00000010: // 10 - влево
+				STOP; RIGHT;
+  d6:	82 b3       	in	r24, 0x12	; 18
+  d8:	8f 75       	andi	r24, 0x5F	; 95
+  da:	82 bb       	out	0x12, r24	; 18
+  dc:	95 9a       	sbi	0x12, 5	; 18
+			break;
+  de:	02 c0       	rjmp	.+4      	; 0xe4 <__vector_9+0x4e>
+			case 0b00000011: // 11 - вперед
+				LEFT; RIGHT;
+  e0:	97 9a       	sbi	0x12, 7	; 18
+  e2:	95 9a       	sbi	0x12, 5	; 18
+			break;
+		}
+	}
+}
+  e4:	8f 91       	pop	r24
+  e6:	0f 90       	pop	r0
+  e8:	0f be       	out	0x3f, r0	; 63
+  ea:	0f 90       	pop	r0
+  ec:	1f 90       	pop	r1
+  ee:	18 95       	reti
+
+000000f0 <main>:
+
+int
+main(void)
+{
+	cli();
+  f0:	f8 94       	cli
+
+	configure_pins();
+  f2:	c1 df       	rcall	.-126    	; 0x76 <_Z14configure_pinsv>
+  f4:	ca df       	rcall	.-108    	; 0x8a <_Z15configure_timerv>
+	configure_timer();
+  f6:	78 94       	sei
+  f8:	54 e0       	ldi	r21, 0x04	; 4
+
+	sei();
+  fa:	40 e0       	ldi	r20, 0x00	; 0
+
+	while (1)
+	{
+		y = INPUT_PIN;
+  fc:	89 b3       	in	r24, 0x19	; 25
+  fe:	80 93 62 00 	sts	0x0062, r24
+ 102:	85 2f       	mov	r24, r21
+ 104:	94 2f       	mov	r25, r20
+ 106:	20 91 62 00 	lds	r18, 0x0062
+		for (int i = 0; i < 4; i++)
+		{
+			z = y;
+ 10a:	20 93 61 00 	sts	0x0061, r18
+ 10e:	20 91 61 00 	lds	r18, 0x0061
+			z &= 0b00000011;
+ 112:	23 70       	andi	r18, 0x03	; 3
+ 114:	20 93 61 00 	sts	0x0061, r18
+ 118:	10 92 60 00 	sts	0x0060, r1
+			check=false;
+ 11c:	20 91 62 00 	lds	r18, 0x0062
+			y = y >> 2;
+ 120:	30 e0       	ldi	r19, 0x00	; 0
+ 122:	35 95       	asr	r19
+ 124:	27 95       	ror	r18
+ 126:	35 95       	asr	r19
+ 128:	27 95       	ror	r18
+ 12a:	20 93 62 00 	sts	0x0062, r18
+ 12e:	2f ef       	ldi	r18, 0xFF	; 255
+ 130:	39 e6       	ldi	r19, 0x69	; 105
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 132:	68 e1       	ldi	r22, 0x18	; 24
+ 134:	21 50       	subi	r18, 0x01	; 1
+ 136:	30 40       	sbci	r19, 0x00	; 0
+ 138:	60 40       	sbci	r22, 0x00	; 0
+ 13a:	e1 f7       	brne	.-8      	; 0x134 <main+0x44>
+ 13c:	00 c0       	rjmp	.+0      	; 0x13e <main+0x4e>
+ 13e:	00 00       	nop
+ 140:	01 97       	sbiw	r24, 0x01	; 1
+ 142:	00 97       	sbiw	r24, 0x00	; 0
+ 144:	01 f7       	brne	.-64     	; 0x106 <main+0x16>
+	sei();
+
+	while (1)
+	{
+		y = INPUT_PIN;
+		for (int i = 0; i < 4; i++)
+ 146:	da cf       	rjmp	.-76     	; 0xfc <main+0xc>
+
+00000148 <_exit>:
+ 148:	f8 94       	cli
+
+0000014a <__stop_program>:
+ 14a:	ff cf       	rjmp	.-2      	; 0x14a <__stop_program>

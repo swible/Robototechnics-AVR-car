@@ -13,20 +13,26 @@
 #define COM3_DIR DDRD 
 #define COM4_DIR DDRB 
 
-#define ENGINE_PORT PORTD 
+#define ENGINE_PORT PORTD
 #define COM2_PORT PORTD 
 #define COM3_PORT PORTD 
 #define COM4_PORT PORTB 
+
+#define STOP ENGINE_PORT &= ~(_BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT))
+#define LEFT ENGINE_PORT |= _BV(ENGINE_LEFT)
+#define RIGHT ENGINE_PORT |= _BV(ENGINE_RIGHT)
 
 /*#define ENGINE_PIN PIND 
 #define COM2_PIN PIND 
 #define COM3_PIN PIND 
 #define COM4_PIN PINB 
 #define COM5_PIN PINA */ 
+#define INPUT_PIN PINA
 
 volatile uint8_t x = 0; 
 volatile uint8_t y = 0; 
-volatile uint8_t Z = 0; 
+volatile uint8_t z = 0;
+volatile bool check=false;
 
 void 
 configure_pins() 
@@ -34,8 +40,8 @@ configure_pins()
 	ENGINE_DIR |= _BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT); 
 	ENGINE_PORT &= ~(_BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT)); 
 
-	DDRA = 0x00; 
-	PORTA = 0xFF; 
+	DDRA = 0x00;
+	INPUT_PIN = 0xFF;
 }
 
 void
@@ -47,21 +53,24 @@ configure_timer()
 
 ISR(TIMER0_OVF_vect)
 {
-	switch (x)
+	if(!check)
 	{
-		case 0:
-		if (PINC & _BV(PC3))
+		check=true;
+		switch (z)
 		{
-			COM1_PORT ^= _BV(COM1);
-			x = 1;
+			case 0b00000000: // 00 - стоп
+				STOP;
+			break;
+			case 0b0000001: // 01 - вправо
+				STOP; LEFT;
+			break;
+			case 0b00000010: // 10 - влево
+				STOP; RIGHT;
+			break;
+			case 0b00000011: // 11 - вперед
+				LEFT; RIGHT;
+			break;
 		}
-		break;
-		case 1:
-		if (!(PINC & _BV(PC3)))
-		{
-			x = 0;
-		}
-		break;
 	}
 }
 
@@ -74,8 +83,18 @@ main(void)
 	configure_timer();
 
 	sei();
+
 	while (1)
 	{
+		y = INPUT_PIN;
+		for (int i = 0; i < 4; i++)
+		{
+			z = y;
+			z &= 0b00000011;
+			check=false;
+			y = y >> 2;
+			_delay_ms(1000);
+		}
 	}
 	return 0;
 }
