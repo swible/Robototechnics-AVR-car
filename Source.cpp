@@ -58,16 +58,16 @@ ISR(TIMER0_OVF_vect)
 		check=true;
 		switch (z)
 		{
-			case 0b00000000: // 00 - стоп
+			case 0b00000000: // 00 - СЃС‚РѕРї
 				STOP;
 			break;
-			case 0b0000001: // 01 - вправо
+			case 0b0000001: // 01 - РІРїСЂР°РІРѕ
 				STOP; LEFT;
 			break;
-			case 0b00000010: // 10 - влево
+			case 0b00000010: // 10 - РІР»РµРІРѕ
 				STOP; RIGHT;
 			break;
-			case 0b00000011: // 11 - вперед
+			case 0b00000011: // 11 - РІРїРµСЂРµРґ
 				LEFT; RIGHT;
 			break;
 		}
