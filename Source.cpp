@@ -73,6 +73,7 @@ void commands_work()
 
 /*void engine_work()
 {
+<<<<<<< HEAD
 	switch(step){
 	case(01)
 			step = 02
@@ -85,6 +86,23 @@ void commands_work()
 			break;
 	case(04)
 			step = 01
+=======
+	if(!check)
+	{
+		check=true;
+		switch (z)
+		{
+			case 0b00000000: // 00 -
+				STOP;
+			break;
+			case 0b0000001: // 01 -
+				STOP; LEFT;
+			break;
+			case 0b00000010: // 10 -
+				STOP; RIGHT;
+			break;
+			case 0b00000011: // 11 -
+				LEFT; RIGHT;
 			break;
 	}
 }*/
