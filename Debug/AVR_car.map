@@ -12,7 +12,6 @@ Discarded input sections
  .text          0x00000000        0x0 ./Source.o
  .data          0x00000000        0x0 ./Source.o
  .bss           0x00000000        0x0 ./Source.o
- .bss.x         0x00000000        0x1 ./Source.o
  .text          0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  .data          0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
@@ -160,7 +159,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x14c
+.text           0x00000000      0x1ec
  *(.vectors)
  .vectors       0x00000000       0x54 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
                 0x00000000                __vector_default
@@ -243,16 +242,25 @@ END GROUP
  .text._Z15configure_timerv
                 0x0000008a        0xc ./Source.o
                 0x0000008a                _Z15configure_timerv
+ .text._Z11Engine_workv
+                0x00000096       0x32 ./Source.o
+                0x00000096                _Z11Engine_workv
+ .text._Z13Commands_workv
+                0x000000c8       0x48 ./Source.o
+                0x000000c8                _Z13Commands_workv
+ .text._Z8Pwm_workv
+                0x00000110       0x3a ./Source.o
+                0x00000110                _Z8Pwm_workv
  .text.__vector_9
-                0x00000096       0x5a ./Source.o
-                0x00000096                __vector_9
- .text.main     0x000000f0       0x58 ./Source.o
-                0x000000f0                main
-                0x00000148                . = ALIGN (0x2)
+                0x0000014a       0x4a ./Source.o
+                0x0000014a                __vector_9
+ .text.main     0x00000194       0x54 ./Source.o
+                0x00000194                main
+                0x000001e8                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000148        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
-                0x00000148                _exit
-                0x00000148                exit
+ .fini9         0x000001e8        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+                0x000001e8                _exit
+                0x000001e8                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -271,11 +279,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000148        0x4 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+ .fini0         0x000001e8        0x4 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000014c                _etext = .
+                0x000001ec                _etext = .
 
-.data           0x00800060        0x0 load address 0x0000014c
+.data           0x00800060        0x0 load address 0x000001ec
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -286,27 +294,36 @@ END GROUP
                 0x00800060                _edata = .
                 0x00800060                PROVIDE (__data_end, .)
 
-.bss            0x00800060        0x3
+.bss            0x00800060        0x6
                 0x00800060                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.check     0x00800060        0x1 ./Source.o
-                0x00800060                check
- .bss.z         0x00800061        0x1 ./Source.o
-                0x00800061                z
- .bss.y         0x00800062        0x1 ./Source.o
-                0x00800062                y
+ .bss.pwm_right
+                0x00800060        0x1 ./Source.o
+                0x00800060                pwm_right
+ .bss.pwm_left  0x00800061        0x1 ./Source.o
+                0x00800061                pwm_left
+ .bss.counter   0x00800062        0x1 ./Source.o
+                0x00800062                counter
+ .bss.commands_switch
+                0x00800063        0x1 ./Source.o
+                0x00800063                commands_switch
+ .bss.engine_switch
+                0x00800064        0x1 ./Source.o
+                0x00800064                engine_switch
+ .bss.pin_copy  0x00800065        0x1 ./Source.o
+                0x00800065                pin_copy
  *(COMMON)
-                0x00800063                PROVIDE (__bss_end, .)
-                0x0000014c                __data_load_start = LOADADDR (.data)
-                0x0000014c                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800066                PROVIDE (__bss_end, .)
+                0x000001ec                __data_load_start = LOADADDR (.data)
+                0x000001ec                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800063        0x0
-                0x00800063                PROVIDE (__noinit_start, .)
+.noinit         0x00800066        0x0
+                0x00800066                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800063                PROVIDE (__noinit_end, .)
-                0x00800063                _end = .
-                0x00800063                PROVIDE (__heap_start, .)
+                0x00800066                PROVIDE (__noinit_end, .)
+                0x00800066                _end = .
+                0x00800066                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -327,13 +344,13 @@ END GROUP
 .user_signatures
  *(.user_signatures*)
 
-.stab           0x00000000      0x684
+.stab           0x00000000      0x7d4
  *(.stab)
- .stab          0x00000000      0x684 ./Source.o
+ .stab          0x00000000      0x7d4 ./Source.o
 
-.stabstr        0x00000000      0xcf7
+.stabstr        0x00000000      0xd83
  *(.stabstr)
- .stabstr       0x00000000      0xcf7 ./Source.o
+ .stabstr       0x00000000      0xd83 ./Source.o
 
 .stab.excl
  *(.stab.excl)
@@ -420,6 +437,9 @@ LOAD linker stubs
 Cross Reference Table
 
 Symbol                                            File
+Commands_work()                                   ./Source.o
+Engine_work()                                     ./Source.o
+Pwm_work()                                        ./Source.o
 __bad_interrupt                                   d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 __bss_end                                         d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
 __bss_start                                       d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
@@ -452,13 +472,15 @@ __vector_9                                        ./Source.o
 __vector_default                                  d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 __vectors                                         d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 _exit                                             d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
-check                                             ./Source.o
+commands_switch                                   ./Source.o
 configure_pins()                                  ./Source.o
 configure_timer()                                 ./Source.o
+counter                                           ./Source.o
+engine_switch                                     ./Source.o
 exit                                              d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
                                                   d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 main                                              ./Source.o
                                                   d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
-x                                                 ./Source.o
-y                                                 ./Source.o
-z                                                 ./Source.o
+pin_copy                                          ./Source.o
+pwm_left                                          ./Source.o
+pwm_right                                         ./Source.o

@@ -3,15 +3,15 @@ AVR_car.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000014c  00000000  00000000  00000074  2**1
+  0 .text         000001ec  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .bss          00000003  00800060  00800060  000001c0  2**0
+  1 .bss          00000006  00800060  00800060  00000260  2**0
                   ALLOC
-  2 .stab         00000684  00000000  00000000  000001c0  2**2
+  2 .stab         000007d4  00000000  00000000  00000260  2**2
                   CONTENTS, READONLY, DEBUGGING
-  3 .stabstr      00000cf7  00000000  00000000  00000844  2**0
+  3 .stabstr      00000d83  00000000  00000000  00000a34  2**0
                   CONTENTS, READONLY, DEBUGGING
-  4 .comment      00000030  00000000  00000000  0000153b  2**0
+  4 .comment      00000030  00000000  00000000  000017b7  2**0
                   CONTENTS, READONLY
 
 Disassembly of section .text:
@@ -35,7 +35,7 @@ Disassembly of section .text:
   1e:	00 00       	nop
   20:	29 c0       	rjmp	.+82     	; 0x74 <__bad_interrupt>
   22:	00 00       	nop
-  24:	38 c0       	rjmp	.+112    	; 0x96 <__vector_9>
+  24:	92 c0       	rjmp	.+292    	; 0x14a <__vector_9>
   26:	00 00       	nop
   28:	25 c0       	rjmp	.+74     	; 0x74 <__bad_interrupt>
   2a:	00 00       	nop
@@ -78,26 +78,26 @@ Disassembly of section .text:
   68:	1d 92       	st	X+, r1
 
 0000006a <.do_clear_bss_start>:
-  6a:	a3 36       	cpi	r26, 0x63	; 99
+  6a:	a6 36       	cpi	r26, 0x66	; 102
   6c:	b2 07       	cpc	r27, r18
   6e:	e1 f7       	brne	.-8      	; 0x68 <.do_clear_bss_loop>
-  70:	3f d0       	rcall	.+126    	; 0xf0 <main>
-  72:	6a c0       	rjmp	.+212    	; 0x148 <_exit>
+  70:	91 d0       	rcall	.+290    	; 0x194 <main>
+  72:	ba c0       	rjmp	.+372    	; 0x1e8 <_exit>
 
 00000074 <__bad_interrupt>:
   74:	c5 cf       	rjmp	.-118    	; 0x0 <__vectors>
 
 00000076 <_Z14configure_pinsv>:
-volatile bool check=false;
+volatile uint8_t pwm_right = 0;
 
-void 
-configure_pins() 
-{ 
-	ENGINE_DIR |= _BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT); 
+void
+configure_pins()
+{
+	ENGINE_DIR |= _BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT);
   76:	81 b3       	in	r24, 0x11	; 17
   78:	80 6a       	ori	r24, 0xA0	; 160
   7a:	81 bb       	out	0x11, r24	; 17
-	ENGINE_PORT &= ~(_BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT)); 
+	ENGINE_PORT &= ~(_BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT));
   7c:	82 b3       	in	r24, 0x12	; 18
   7e:	8f 75       	andi	r24, 0x5F	; 95
   80:	82 bb       	out	0x12, r24	; 18
@@ -110,7 +110,7 @@ configure_pins()
   88:	08 95       	ret
 
 0000008a <_Z15configure_timerv>:
-}
+
 
 void
 configure_timer()
@@ -124,146 +124,260 @@ configure_timer()
   92:	89 bf       	out	0x39, r24	; 57
   94:	08 95       	ret
 
-00000096 <__vector_9>:
+00000096 <_Z11Engine_workv>:
+
+
+void
+Engine_work() //Можно записать сюда программу, которая будет выполнятся без использования переключателей
+{
+	switch(engine_switch)
+  96:	80 91 64 00 	lds	r24, 0x0064
+  9a:	81 30       	cpi	r24, 0x01	; 1
+  9c:	51 f0       	breq	.+20     	; 0xb2 <_Z11Engine_workv+0x1c>
+  9e:	28 f0       	brcs	.+10     	; 0xaa <_Z11Engine_workv+0x14>
+  a0:	82 30       	cpi	r24, 0x02	; 2
+  a2:	59 f0       	breq	.+22     	; 0xba <_Z11Engine_workv+0x24>
+  a4:	83 30       	cpi	r24, 0x03	; 3
+  a6:	69 f0       	breq	.+26     	; 0xc2 <_Z11Engine_workv+0x2c>
+  a8:	08 95       	ret
+	{
+		case(0):
+
+			engine_switch = 1;
+  aa:	81 e0       	ldi	r24, 0x01	; 1
+  ac:	80 93 64 00 	sts	0x0064, r24
+			break;
+  b0:	08 95       	ret
+
+		case(1):
+
+			engine_switch = 2;
+  b2:	82 e0       	ldi	r24, 0x02	; 2
+  b4:	80 93 64 00 	sts	0x0064, r24
+			break;
+  b8:	08 95       	ret
+
+		case(2):
+
+			engine_switch = 3;
+  ba:	83 e0       	ldi	r24, 0x03	; 3
+  bc:	80 93 64 00 	sts	0x0064, r24
+			break;
+  c0:	08 95       	ret
+
+		case(3):
+
+			engine_switch = 0;
+  c2:	10 92 64 00 	sts	0x0064, r1
+  c6:	08 95       	ret
+
+000000c8 <_Z13Commands_workv>:
+
+
+void
+Commands_work() // комманды, отправленные парами переключателей
+{
+	switch (commands_switch)
+  c8:	80 91 63 00 	lds	r24, 0x0063
+  cc:	81 30       	cpi	r24, 0x01	; 1
+  ce:	99 f0       	breq	.+38     	; 0xf6 <_Z13Commands_workv+0x2e>
+  d0:	28 f0       	brcs	.+10     	; 0xdc <_Z13Commands_workv+0x14>
+  d2:	82 30       	cpi	r24, 0x02	; 2
+  d4:	49 f0       	breq	.+18     	; 0xe8 <_Z13Commands_workv+0x20>
+  d6:	83 30       	cpi	r24, 0x03	; 3
+  d8:	a9 f0       	breq	.+42     	; 0x104 <_Z13Commands_workv+0x3c>
+  da:	08 95       	ret
+	{
+		case 0b00000000: // 00 - стоп
+			pwm_left = 1;
+  dc:	81 e0       	ldi	r24, 0x01	; 1
+  de:	80 93 61 00 	sts	0x0061, r24
+			pwm_right = 1;
+  e2:	80 93 60 00 	sts	0x0060, r24
+			break;
+  e6:	08 95       	ret
+
+		case 0b00000010: // 10 - влево
+			pwm_left = 10;
+  e8:	8a e0       	ldi	r24, 0x0A	; 10
+  ea:	80 93 61 00 	sts	0x0061, r24
+			pwm_right = 5;
+  ee:	85 e0       	ldi	r24, 0x05	; 5
+  f0:	80 93 60 00 	sts	0x0060, r24
+			break;
+  f4:	08 95       	ret
+
+		case 0b00000001: // 01 - вправо
+			pwm_left = 5;
+  f6:	85 e0       	ldi	r24, 0x05	; 5
+  f8:	80 93 61 00 	sts	0x0061, r24
+			pwm_right = 10;
+  fc:	8a e0       	ldi	r24, 0x0A	; 10
+  fe:	80 93 60 00 	sts	0x0060, r24
+			break;
+ 102:	08 95       	ret
+
+		case 0b00000011: // 11 - вперед
+			pwm_left = 10;
+ 104:	8a e0       	ldi	r24, 0x0A	; 10
+ 106:	80 93 61 00 	sts	0x0061, r24
+			pwm_right = 10;
+ 10a:	80 93 60 00 	sts	0x0060, r24
+ 10e:	08 95       	ret
+
+00000110 <_Z8Pwm_workv>:
+
+
+void
+Pwm_work() //Скорость вращения колес
+{
+	if(counter++ == 10) counter = 0;
+ 110:	80 91 62 00 	lds	r24, 0x0062
+ 114:	91 e0       	ldi	r25, 0x01	; 1
+ 116:	98 0f       	add	r25, r24
+ 118:	90 93 62 00 	sts	0x0062, r25
+ 11c:	8a 30       	cpi	r24, 0x0A	; 10
+ 11e:	11 f4       	brne	.+4      	; 0x124 <_Z8Pwm_workv+0x14>
+ 120:	10 92 62 00 	sts	0x0062, r1
+	if(counter < pwm_left) LEFT; else STOP_LEFT;
+ 124:	90 91 62 00 	lds	r25, 0x0062
+ 128:	80 91 61 00 	lds	r24, 0x0061
+ 12c:	98 17       	cp	r25, r24
+ 12e:	10 f4       	brcc	.+4      	; 0x134 <_Z8Pwm_workv+0x24>
+ 130:	97 9a       	sbi	0x12, 7	; 18
+ 132:	01 c0       	rjmp	.+2      	; 0x136 <_Z8Pwm_workv+0x26>
+ 134:	97 98       	cbi	0x12, 7	; 18
+	if(counter < pwm_right) RIGHT; else STOP_RIGHT;
+ 136:	90 91 62 00 	lds	r25, 0x0062
+ 13a:	80 91 60 00 	lds	r24, 0x0060
+ 13e:	98 17       	cp	r25, r24
+ 140:	10 f4       	brcc	.+4      	; 0x146 <_Z8Pwm_workv+0x36>
+ 142:	95 9a       	sbi	0x12, 5	; 18
+ 144:	08 95       	ret
+ 146:	95 98       	cbi	0x12, 5	; 18
+ 148:	08 95       	ret
+
+0000014a <__vector_9>:
 }
+
+
 
 ISR(TIMER0_OVF_vect)
 {
-  96:	1f 92       	push	r1
-  98:	0f 92       	push	r0
-  9a:	0f b6       	in	r0, 0x3f	; 63
-  9c:	0f 92       	push	r0
-  9e:	11 24       	eor	r1, r1
-  a0:	8f 93       	push	r24
-	if(!check)
-  a2:	80 91 60 00 	lds	r24, 0x0060
-  a6:	81 11       	cpse	r24, r1
-  a8:	1d c0       	rjmp	.+58     	; 0xe4 <__vector_9+0x4e>
-	{
-		check=true;
-  aa:	81 e0       	ldi	r24, 0x01	; 1
-  ac:	80 93 60 00 	sts	0x0060, r24
-		switch (z)
-  b0:	80 91 61 00 	lds	r24, 0x0061
-  b4:	81 30       	cpi	r24, 0x01	; 1
-  b6:	51 f0       	breq	.+20     	; 0xcc <__vector_9+0x36>
-  b8:	28 f0       	brcs	.+10     	; 0xc4 <__vector_9+0x2e>
-  ba:	82 30       	cpi	r24, 0x02	; 2
-  bc:	61 f0       	breq	.+24     	; 0xd6 <__vector_9+0x40>
-  be:	83 30       	cpi	r24, 0x03	; 3
-  c0:	79 f0       	breq	.+30     	; 0xe0 <__vector_9+0x4a>
-  c2:	10 c0       	rjmp	.+32     	; 0xe4 <__vector_9+0x4e>
-		{
-			case 0b00000000: // 00 - стоп
-				STOP;
-  c4:	82 b3       	in	r24, 0x12	; 18
-  c6:	8f 75       	andi	r24, 0x5F	; 95
-  c8:	82 bb       	out	0x12, r24	; 18
-			break;
-  ca:	0c c0       	rjmp	.+24     	; 0xe4 <__vector_9+0x4e>
-			case 0b0000001: // 01 - вправо
-				STOP; LEFT;
-  cc:	82 b3       	in	r24, 0x12	; 18
-  ce:	8f 75       	andi	r24, 0x5F	; 95
-  d0:	82 bb       	out	0x12, r24	; 18
-  d2:	97 9a       	sbi	0x12, 7	; 18
-			break;
-  d4:	07 c0       	rjmp	.+14     	; 0xe4 <__vector_9+0x4e>
-			case 0b00000010: // 10 - влево
-				STOP; RIGHT;
-  d6:	82 b3       	in	r24, 0x12	; 18
-  d8:	8f 75       	andi	r24, 0x5F	; 95
-  da:	82 bb       	out	0x12, r24	; 18
-  dc:	95 9a       	sbi	0x12, 5	; 18
-			break;
-  de:	02 c0       	rjmp	.+4      	; 0xe4 <__vector_9+0x4e>
-			case 0b00000011: // 11 - вперед
-				LEFT; RIGHT;
-  e0:	97 9a       	sbi	0x12, 7	; 18
-  e2:	95 9a       	sbi	0x12, 5	; 18
-			break;
-		}
-	}
+ 14a:	1f 92       	push	r1
+ 14c:	0f 92       	push	r0
+ 14e:	0f b6       	in	r0, 0x3f	; 63
+ 150:	0f 92       	push	r0
+ 152:	11 24       	eor	r1, r1
+ 154:	2f 93       	push	r18
+ 156:	3f 93       	push	r19
+ 158:	4f 93       	push	r20
+ 15a:	5f 93       	push	r21
+ 15c:	6f 93       	push	r22
+ 15e:	7f 93       	push	r23
+ 160:	8f 93       	push	r24
+ 162:	9f 93       	push	r25
+ 164:	af 93       	push	r26
+ 166:	bf 93       	push	r27
+ 168:	ef 93       	push	r30
+ 16a:	ff 93       	push	r31
+	Engine_work();
+ 16c:	94 df       	rcall	.-216    	; 0x96 <_Z11Engine_workv>
+ 16e:	ac df       	rcall	.-168    	; 0xc8 <_Z13Commands_workv>
+	Commands_work();
+ 170:	cf df       	rcall	.-98     	; 0x110 <_Z8Pwm_workv>
+ 172:	ff 91       	pop	r31
+	Pwm_work();
+ 174:	ef 91       	pop	r30
+ 176:	bf 91       	pop	r27
 }
-  e4:	8f 91       	pop	r24
-  e6:	0f 90       	pop	r0
-  e8:	0f be       	out	0x3f, r0	; 63
-  ea:	0f 90       	pop	r0
-  ec:	1f 90       	pop	r1
-  ee:	18 95       	reti
+ 178:	af 91       	pop	r26
+ 17a:	9f 91       	pop	r25
+ 17c:	8f 91       	pop	r24
+ 17e:	7f 91       	pop	r23
+ 180:	6f 91       	pop	r22
+ 182:	5f 91       	pop	r21
+ 184:	4f 91       	pop	r20
+ 186:	3f 91       	pop	r19
+ 188:	2f 91       	pop	r18
+ 18a:	0f 90       	pop	r0
+ 18c:	0f be       	out	0x3f, r0	; 63
+ 18e:	0f 90       	pop	r0
+ 190:	1f 90       	pop	r1
+ 192:	18 95       	reti
 
-000000f0 <main>:
+00000194 <main>:
+
 
 int
 main(void)
 {
 	cli();
-  f0:	f8 94       	cli
+ 194:	f8 94       	cli
 
 	configure_pins();
-  f2:	c1 df       	rcall	.-126    	; 0x76 <_Z14configure_pinsv>
-  f4:	ca df       	rcall	.-108    	; 0x8a <_Z15configure_timerv>
+ 196:	6f df       	rcall	.-290    	; 0x76 <_Z14configure_pinsv>
+ 198:	78 df       	rcall	.-272    	; 0x8a <_Z15configure_timerv>
 	configure_timer();
-  f6:	78 94       	sei
-  f8:	54 e0       	ldi	r21, 0x04	; 4
+ 19a:	78 94       	sei
+ 19c:	54 e0       	ldi	r21, 0x04	; 4
 
 	sei();
-  fa:	40 e0       	ldi	r20, 0x00	; 0
+ 19e:	40 e0       	ldi	r20, 0x00	; 0
 
 	while (1)
 	{
-		y = INPUT_PIN;
-  fc:	89 b3       	in	r24, 0x19	; 25
-  fe:	80 93 62 00 	sts	0x0062, r24
- 102:	85 2f       	mov	r24, r21
- 104:	94 2f       	mov	r25, r20
- 106:	20 91 62 00 	lds	r18, 0x0062
+		pin_copy = INPUT_PIN;
+ 1a0:	89 b3       	in	r24, 0x19	; 25
+ 1a2:	80 93 65 00 	sts	0x0065, r24
+ 1a6:	85 2f       	mov	r24, r21
+ 1a8:	94 2f       	mov	r25, r20
+ 1aa:	20 91 65 00 	lds	r18, 0x0065
 		for (int i = 0; i < 4; i++)
 		{
-			z = y;
- 10a:	20 93 61 00 	sts	0x0061, r18
- 10e:	20 91 61 00 	lds	r18, 0x0061
-			z &= 0b00000011;
- 112:	23 70       	andi	r18, 0x03	; 3
- 114:	20 93 61 00 	sts	0x0061, r18
- 118:	10 92 60 00 	sts	0x0060, r1
-			check=false;
- 11c:	20 91 62 00 	lds	r18, 0x0062
-			y = y >> 2;
- 120:	30 e0       	ldi	r19, 0x00	; 0
- 122:	35 95       	asr	r19
- 124:	27 95       	ror	r18
- 126:	35 95       	asr	r19
- 128:	27 95       	ror	r18
- 12a:	20 93 62 00 	sts	0x0062, r18
- 12e:	2f ef       	ldi	r18, 0xFF	; 255
- 130:	39 e6       	ldi	r19, 0x69	; 105
+			commands_switch = pin_copy;
+ 1ae:	20 93 63 00 	sts	0x0063, r18
+ 1b2:	20 91 63 00 	lds	r18, 0x0063
+			commands_switch &= 0b00000011;
+ 1b6:	23 70       	andi	r18, 0x03	; 3
+ 1b8:	20 93 63 00 	sts	0x0063, r18
+ 1bc:	20 91 65 00 	lds	r18, 0x0065
+			//check=false;
+			pin_copy = pin_copy >> 2;
+ 1c0:	30 e0       	ldi	r19, 0x00	; 0
+ 1c2:	35 95       	asr	r19
+ 1c4:	27 95       	ror	r18
+ 1c6:	35 95       	asr	r19
+ 1c8:	27 95       	ror	r18
+ 1ca:	20 93 65 00 	sts	0x0065, r18
+ 1ce:	2f ef       	ldi	r18, 0xFF	; 255
+ 1d0:	33 ed       	ldi	r19, 0xD3	; 211
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 132:	68 e1       	ldi	r22, 0x18	; 24
- 134:	21 50       	subi	r18, 0x01	; 1
- 136:	30 40       	sbci	r19, 0x00	; 0
- 138:	60 40       	sbci	r22, 0x00	; 0
- 13a:	e1 f7       	brne	.-8      	; 0x134 <main+0x44>
- 13c:	00 c0       	rjmp	.+0      	; 0x13e <main+0x4e>
- 13e:	00 00       	nop
- 140:	01 97       	sbiw	r24, 0x01	; 1
- 142:	00 97       	sbiw	r24, 0x00	; 0
- 144:	01 f7       	brne	.-64     	; 0x106 <main+0x16>
+ 1d2:	60 e3       	ldi	r22, 0x30	; 48
+ 1d4:	21 50       	subi	r18, 0x01	; 1
+ 1d6:	30 40       	sbci	r19, 0x00	; 0
+ 1d8:	60 40       	sbci	r22, 0x00	; 0
+ 1da:	e1 f7       	brne	.-8      	; 0x1d4 <main+0x40>
+ 1dc:	00 c0       	rjmp	.+0      	; 0x1de <main+0x4a>
+ 1de:	00 00       	nop
+ 1e0:	01 97       	sbiw	r24, 0x01	; 1
+ 1e2:	00 97       	sbiw	r24, 0x00	; 0
+ 1e4:	11 f7       	brne	.-60     	; 0x1aa <main+0x16>
 	sei();
 
 	while (1)
 	{
-		y = INPUT_PIN;
+		pin_copy = INPUT_PIN;
 		for (int i = 0; i < 4; i++)
- 146:	da cf       	rjmp	.-76     	; 0xfc <main+0xc>
+ 1e6:	dc cf       	rjmp	.-72     	; 0x1a0 <main+0xc>
 
-00000148 <_exit>:
- 148:	f8 94       	cli
+000001e8 <_exit>:
+ 1e8:	f8 94       	cli
 
-0000014a <__stop_program>:
- 14a:	ff cf       	rjmp	.-2      	; 0x14a <__stop_program>
+000001ea <__stop_program>:
+ 1ea:	ff cf       	rjmp	.-2      	; 0x1ea <__stop_program>
