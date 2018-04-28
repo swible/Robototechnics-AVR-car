@@ -2,16 +2,20 @@ Archive member included because of file (symbol)
 
 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
                               d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o (exit)
+d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+                              ./detector.o (__tablejump2__)
+d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+                              ./detector.o (__do_copy_data)
 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
-                              ./Source.o (__do_clear_bss)
+                              ./detector.o (__do_clear_bss)
 
 Discarded input sections
 
  .data          0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
  .bss           0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
- .text          0x00000000        0x0 ./Source.o
- .data          0x00000000        0x0 ./Source.o
- .bss           0x00000000        0x0 ./Source.o
+ .text          0x00000000        0x0 ./detector.o
+ .data          0x00000000        0x0 ./detector.o
+ .bss           0x00000000        0x0 ./detector.o
  .text          0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  .data          0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
@@ -28,6 +32,37 @@ Discarded input sections
                 0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  .text.libgcc.fixed
                 0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+ .text          0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+ .data          0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+ .bss           0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+ .text.libgcc.mul
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+ .text.libgcc.div
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+ .text          0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+ .data          0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+ .bss           0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.mul
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.div
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
  .text          0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
  .data          0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
  .bss           0x00000000        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
@@ -60,7 +95,7 @@ user_signatures  0x00850000         0x00000400         rw !x
 Linker script and memory map
 
 LOAD d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
-LOAD ./Source.o
+LOAD ./detector.o
 LOAD d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a
 LOAD d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5\libm.a
 START GROUP
@@ -159,47 +194,51 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x1ec
+.text           0x00000000      0x290
  *(.vectors)
  .vectors       0x00000000       0x54 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
                 0x00000000                __vector_default
                 0x00000000                __vectors
  *(.vectors)
  *(.progmem.gcc*)
-                0x00000054                . = ALIGN (0x2)
-                0x00000054                __trampolines_start = .
+ .progmem.gcc_sw_table.__vector_9
+                0x00000054       0x12 ./detector.o
+                0x00000066                . = ALIGN (0x2)
+                0x00000066                __trampolines_start = .
  *(.trampolines)
- .trampolines   0x00000054        0x0 linker stubs
+ .trampolines   0x00000066        0x0 linker stubs
  *(.trampolines*)
-                0x00000054                __trampolines_end = .
+                0x00000066                __trampolines_end = .
  *(.progmem*)
-                0x00000054                . = ALIGN (0x2)
+                0x00000066                . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x00000054                __ctors_start = .
+                0x00000066                __ctors_start = .
  *(.ctors)
-                0x00000054                __ctors_end = .
-                0x00000054                __dtors_start = .
+                0x00000066                __ctors_end = .
+                0x00000066                __dtors_start = .
  *(.dtors)
-                0x00000054                __dtors_end = .
+                0x00000066                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x00000054        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
-                0x00000054                __init
+ .init0         0x00000066        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
+                0x00000066                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x00000054        0xc d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
+ .init2         0x00000066        0xc d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
  *(.init2)
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x00000060       0x10 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
-                0x00000060                __do_clear_bss
+ .init4         0x00000072       0x16 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+                0x00000072                __do_copy_data
+ .init4         0x00000088       0x10 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
+                0x00000088                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -210,57 +249,60 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x00000070        0x4 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
+ .init9         0x00000098        0x4 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
  *(.init9)
  *(.text)
- .text          0x00000074        0x2 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
-                0x00000074                __vector_1
-                0x00000074                __vector_12
-                0x00000074                __bad_interrupt
-                0x00000074                __vector_6
-                0x00000074                __vector_3
-                0x00000074                __vector_11
-                0x00000074                __vector_13
-                0x00000074                __vector_17
-                0x00000074                __vector_19
-                0x00000074                __vector_7
-                0x00000074                __vector_5
-                0x00000074                __vector_4
-                0x00000074                __vector_2
-                0x00000074                __vector_15
-                0x00000074                __vector_8
-                0x00000074                __vector_14
-                0x00000074                __vector_10
-                0x00000074                __vector_16
-                0x00000074                __vector_18
-                0x00000074                __vector_20
-                0x00000076                . = ALIGN (0x2)
+ .text          0x0000009c        0x2 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
+                0x0000009c                __vector_1
+                0x0000009c                __vector_12
+                0x0000009c                __bad_interrupt
+                0x0000009c                __vector_6
+                0x0000009c                __vector_3
+                0x0000009c                __vector_11
+                0x0000009c                __vector_13
+                0x0000009c                __vector_17
+                0x0000009c                __vector_19
+                0x0000009c                __vector_7
+                0x0000009c                __vector_5
+                0x0000009c                __vector_4
+                0x0000009c                __vector_2
+                0x0000009c                __vector_15
+                0x0000009c                __vector_8
+                0x0000009c                __vector_14
+                0x0000009c                __vector_10
+                0x0000009c                __vector_16
+                0x0000009c                __vector_18
+                0x0000009c                __vector_20
+                0x0000009e                . = ALIGN (0x2)
  *(.text.*)
  .text._Z14configure_pinsv
-                0x00000076       0x14 ./Source.o
-                0x00000076                _Z14configure_pinsv
+                0x0000009e       0x1c ./detector.o
+                0x0000009e                _Z14configure_pinsv
  .text._Z15configure_timerv
-                0x0000008a        0xc ./Source.o
-                0x0000008a                _Z15configure_timerv
- .text._Z11Engine_workv
-                0x00000096       0x32 ./Source.o
-                0x00000096                _Z11Engine_workv
- .text._Z13Commands_workv
-                0x000000c8       0x48 ./Source.o
-                0x000000c8                _Z13Commands_workv
- .text._Z8Pwm_workv
-                0x00000110       0x3a ./Source.o
-                0x00000110                _Z8Pwm_workv
+                0x000000ba        0xc ./detector.o
+                0x000000ba                _Z15configure_timerv
+ .text._Z7counterv
+                0x000000c6       0x1e ./detector.o
+                0x000000c6                _Z7counterv
+ .text._Z13delay_counterv
+                0x000000e4       0x1e ./detector.o
+                0x000000e4                _Z13delay_counterv
+ .text._Z11pwm_counterv
+                0x00000102       0x1e ./detector.o
+                0x00000102                _Z11pwm_counterv
  .text.__vector_9
-                0x0000014a       0x4a ./Source.o
-                0x0000014a                __vector_9
- .text.main     0x00000194       0x54 ./Source.o
-                0x00000194                main
-                0x000001e8                . = ALIGN (0x2)
+                0x00000120      0x146 ./detector.o
+                0x00000120                __vector_9
+ .text.main     0x00000266       0x1a ./detector.o
+                0x00000266                main
+ .text.libgcc   0x00000280        0xc d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+                0x00000280                __tablejump2__
+                0x00000284                __tablejump__
+                0x0000028c                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000001e8        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
-                0x000001e8                _exit
-                0x000001e8                exit
+ .fini9         0x0000028c        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+                0x0000028c                _exit
+                0x0000028c                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -279,51 +321,57 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000001e8        0x4 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000028c        0x4 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000001ec                _etext = .
+                0x00000290                _etext = .
 
-.data           0x00800060        0x0 load address 0x000001ec
+.data           0x00800060        0x2 load address 0x00000290
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
+ .data.right_wh
+                0x00800060        0x1 ./detector.o
+                0x00800060                right_wh
+ .data.left_wh  0x00800061        0x1 ./detector.o
+                0x00800061                left_wh
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x00800060                . = ALIGN (0x2)
-                0x00800060                _edata = .
-                0x00800060                PROVIDE (__data_end, .)
+                0x00800062                . = ALIGN (0x2)
+                0x00800062                _edata = .
+                0x00800062                PROVIDE (__data_end, .)
 
-.bss            0x00800060        0x6
-                0x00800060                PROVIDE (__bss_start, .)
+.bss            0x00800062        0x7
+                0x00800062                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.pwm_right
-                0x00800060        0x1 ./Source.o
-                0x00800060                pwm_right
- .bss.pwm_left  0x00800061        0x1 ./Source.o
-                0x00800061                pwm_left
- .bss.counter   0x00800062        0x1 ./Source.o
-                0x00800062                counter
- .bss.commands_switch
-                0x00800063        0x1 ./Source.o
-                0x00800063                commands_switch
- .bss.engine_switch
-                0x00800064        0x1 ./Source.o
-                0x00800064                engine_switch
- .bss.pin_copy  0x00800065        0x1 ./Source.o
-                0x00800065                pin_copy
+ .bss.right_engine_run
+                0x00800062        0x1 ./detector.o
+                0x00800062                right_engine_run
+ .bss.left_engine_run
+                0x00800063        0x1 ./detector.o
+                0x00800063                left_engine_run
+ .bss.cnt2      0x00800064        0x1 ./detector.o
+                0x00800064                cnt2
+ .bss.cnt1      0x00800065        0x1 ./detector.o
+                0x00800065                cnt1
+ .bss.cnt0      0x00800066        0x1 ./detector.o
+                0x00800066                cnt0
+ .bss.detector  0x00800067        0x1 ./detector.o
+                0x00800067                detector
+ .bss.cmd       0x00800068        0x1 ./detector.o
+                0x00800068                cmd
  *(COMMON)
-                0x00800066                PROVIDE (__bss_end, .)
-                0x000001ec                __data_load_start = LOADADDR (.data)
-                0x000001ec                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800069                PROVIDE (__bss_end, .)
+                0x00000290                __data_load_start = LOADADDR (.data)
+                0x00000292                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800066        0x0
-                0x00800066                PROVIDE (__noinit_start, .)
+.noinit         0x00800069        0x0
+                0x00800069                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800066                PROVIDE (__noinit_end, .)
-                0x00800066                _end = .
-                0x00800066                PROVIDE (__heap_start, .)
+                0x00800069                PROVIDE (__noinit_end, .)
+                0x00800069                _end = .
+                0x00800069                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -344,13 +392,13 @@ END GROUP
 .user_signatures
  *(.user_signatures*)
 
-.stab           0x00000000      0x7d4
+.stab           0x00000000      0x900
  *(.stab)
- .stab          0x00000000      0x7d4 ./Source.o
+ .stab          0x00000000      0x900 ./detector.o
 
-.stabstr        0x00000000      0xd83
+.stabstr        0x00000000      0xd71
  *(.stabstr)
- .stabstr       0x00000000      0xd83 ./Source.o
+ .stabstr       0x00000000      0xd71 ./detector.o
 
 .stab.excl
  *(.stab.excl)
@@ -366,7 +414,7 @@ END GROUP
 
 .comment        0x00000000       0x30
  *(.comment)
- .comment       0x00000000       0x30 ./Source.o
+ .comment       0x00000000       0x30 ./detector.o
                                  0x31 (size before relaxing)
 
 .note.gnu.build-id
@@ -437,17 +485,22 @@ LOAD linker stubs
 Cross Reference Table
 
 Symbol                                            File
-Commands_work()                                   ./Source.o
-Engine_work()                                     ./Source.o
-Pwm_work()                                        ./Source.o
 __bad_interrupt                                   d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 __bss_end                                         d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
 __bss_start                                       d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
+__data_end                                        d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+__data_load_start                                 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+__data_start                                      d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
 __do_clear_bss                                    d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_clear_bss.o)
-                                                  ./Source.o
+                                                  ./detector.o
+__do_copy_data                                    d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_copy_data.o)
+                                                  ./detector.o
 __heap_end                                        d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 __init                                            d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 __stack                                           d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
+__tablejump2__                                    d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+                                                  ./detector.o
+__tablejump__                                     d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
 __vector_1                                        d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 __vector_10                                       d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 __vector_11                                       d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
@@ -467,20 +520,26 @@ __vector_5                                        d:/programs/eclipse_c/avr_tool
 __vector_6                                        d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 __vector_7                                        d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 __vector_8                                        d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
-__vector_9                                        ./Source.o
+__vector_9                                        ./detector.o
                                                   d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 __vector_default                                  d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 __vectors                                         d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
 _exit                                             d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
-commands_switch                                   ./Source.o
-configure_pins()                                  ./Source.o
-configure_timer()                                 ./Source.o
-counter                                           ./Source.o
-engine_switch                                     ./Source.o
+cmd                                               ./detector.o
+cnt0                                              ./detector.o
+cnt1                                              ./detector.o
+cnt2                                              ./detector.o
+configure_pins()                                  ./detector.o
+configure_timer()                                 ./detector.o
+counter()                                         ./detector.o
+delay_counter()                                   ./detector.o
+detector                                          ./detector.o
 exit                                              d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
                                                   d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
-main                                              ./Source.o
+left_engine_run                                   ./detector.o
+left_wh                                           ./detector.o
+main                                              ./detector.o
                                                   d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
-pin_copy                                          ./Source.o
-pwm_left                                          ./Source.o
-pwm_right                                         ./Source.o
+pwm_counter()                                     ./detector.o
+right_engine_run                                  ./detector.o
+right_wh                                          ./detector.o
