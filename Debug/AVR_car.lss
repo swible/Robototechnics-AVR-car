@@ -3,17 +3,17 @@ AVR_car.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000290  00000000  00000000  00000094  2**1
+  0 .text         00000348  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000002  00800060  00000290  00000324  2**0
+  1 .data         00000002  00800060  00000348  000003dc  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000007  00800062  00800062  00000326  2**0
+  2 .bss          0000000d  00800062  00800062  000003de  2**0
                   ALLOC
-  3 .stab         00000900  00000000  00000000  00000328  2**2
+  3 .stab         00000a38  00000000  00000000  000003e0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  4 .stabstr      00000d71  00000000  00000000  00000c28  2**0
+  4 .stabstr      00000e41  00000000  00000000  00000e18  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .comment      00000030  00000000  00000000  00001999  2**0
+  5 .comment      00000030  00000000  00000000  00001c59  2**0
                   CONTENTS, READONLY
 
 Disassembly of section .text:
@@ -21,9 +21,9 @@ Disassembly of section .text:
 00000000 <__vectors>:
    0:	32 c0       	rjmp	.+100    	; 0x66 <__ctors_end>
    2:	00 00       	nop
-   4:	4b c0       	rjmp	.+150    	; 0x9c <__bad_interrupt>
+   4:	96 c0       	rjmp	.+300    	; 0x132 <__vector_1>
    6:	00 00       	nop
-   8:	49 c0       	rjmp	.+146    	; 0x9c <__bad_interrupt>
+   8:	a5 c0       	rjmp	.+330    	; 0x154 <__vector_2>
    a:	00 00       	nop
    c:	47 c0       	rjmp	.+142    	; 0x9c <__bad_interrupt>
    e:	00 00       	nop
@@ -37,7 +37,7 @@ Disassembly of section .text:
   1e:	00 00       	nop
   20:	3d c0       	rjmp	.+122    	; 0x9c <__bad_interrupt>
   22:	00 00       	nop
-  24:	7d c0       	rjmp	.+250    	; 0x120 <__vector_9>
+  24:	a8 c0       	rjmp	.+336    	; 0x176 <__vector_9>
   26:	00 00       	nop
   28:	39 c0       	rjmp	.+114    	; 0x9c <__bad_interrupt>
   2a:	00 00       	nop
@@ -61,15 +61,15 @@ Disassembly of section .text:
   4e:	00 00       	nop
   50:	25 c0       	rjmp	.+74     	; 0x9c <__bad_interrupt>
   52:	00 00       	nop
-  54:	ad 00       	.word	0x00ad	; ????
-  56:	b2 00       	.word	0x00b2	; ????
-  58:	ba 00       	.word	0x00ba	; ????
-  5a:	c9 00       	.word	0x00c9	; ????
-  5c:	ce 00       	.word	0x00ce	; ????
-  5e:	d3 00       	.word	0x00d3	; ????
-  60:	da 00       	.word	0x00da	; ????
-  62:	e9 00       	.word	0x00e9	; ????
-  64:	ee 00       	.word	0x00ee	; ????
+  54:	fc 00       	.word	0x00fc	; ????
+  56:	01 01       	movw	r0, r2
+  58:	0b 01       	movw	r0, r22
+  5a:	1a 01       	movw	r2, r20
+  5c:	1f 01       	movw	r2, r30
+  5e:	24 01       	movw	r4, r8
+  60:	2d 01       	movw	r4, r26
+  62:	3c 01       	movw	r6, r24
+  64:	41 01       	movw	r8, r2
 
 00000066 <__ctors_end>:
   66:	11 24       	eor	r1, r1
@@ -83,8 +83,8 @@ Disassembly of section .text:
   72:	10 e0       	ldi	r17, 0x00	; 0
   74:	a0 e6       	ldi	r26, 0x60	; 96
   76:	b0 e0       	ldi	r27, 0x00	; 0
-  78:	e0 e9       	ldi	r30, 0x90	; 144
-  7a:	f2 e0       	ldi	r31, 0x02	; 2
+  78:	e8 e4       	ldi	r30, 0x48	; 72
+  7a:	f3 e0       	ldi	r31, 0x03	; 3
   7c:	02 c0       	rjmp	.+4      	; 0x82 <__do_copy_data+0x10>
   7e:	05 90       	lpm	r0, Z+
   80:	0d 92       	st	X+, r0
@@ -102,17 +102,17 @@ Disassembly of section .text:
   90:	1d 92       	st	X+, r1
 
 00000092 <.do_clear_bss_start>:
-  92:	a9 36       	cpi	r26, 0x69	; 105
+  92:	af 36       	cpi	r26, 0x6F	; 111
   94:	b2 07       	cpc	r27, r18
   96:	e1 f7       	brne	.-8      	; 0x90 <.do_clear_bss_loop>
-  98:	e6 d0       	rcall	.+460    	; 0x266 <main>
-  9a:	f8 c0       	rjmp	.+496    	; 0x28c <_exit>
+  98:	42 d1       	rcall	.+644    	; 0x31e <main>
+  9a:	54 c1       	rjmp	.+680    	; 0x344 <_exit>
 
 0000009c <__bad_interrupt>:
   9c:	b1 cf       	rjmp	.-158    	; 0x0 <__vectors>
 
 0000009e <_Z14configure_pinsv>:
-volatile bool right_engine_run = false;
+volatile uint8_t pwm_right = 0;
 
 void
 configure_pins()
@@ -129,7 +129,6 @@ configure_pins()
   a8:	8d 7e       	andi	r24, 0xED	; 237
   aa:	88 bb       	out	0x18, r24	; 24
 	//DETECTOR_PIN &= ~(_BV(COM_DETECTOR_INPUT)); //«¿œ»€¬¿≈Ã ¬ œ»Õ ÕŒÀ‹
-
 	ENGINE_DIR |= _BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT);
   ac:	81 b3       	in	r24, 0x11	; 17
   ae:	80 6a       	ori	r24, 0xA0	; 160
@@ -155,306 +154,413 @@ configure_timer()
   c2:	89 bf       	out	0x39, r24	; 57
   c4:	08 95       	ret
 
-000000c6 <_Z7counterv>:
+000000c6 <_Z7counterhh>:
 }
 
-int
-counter() //‘”Õ ÷»ﬂ Œ¡Õ”À≈Õ»ﬂ —◊®“◊» ¿
+bool
+counter(uint8_t target, uint8_t max = 100) //‘”Õ ÷»ﬂ Œ¡Õ”À≈Õ»ﬂ —◊®“◊» ¿
 {
-	cnt0++;
-  c6:	80 91 66 00 	lds	r24, 0x0066
-  ca:	8f 5f       	subi	r24, 0xFF	; 255
-  cc:	80 93 66 00 	sts	0x0066, r24
+  c6:	28 2f       	mov	r18, r24
+	/*cnt0++;
 	if (cnt0 == 10) cnt0 = 0;
-  d0:	80 91 66 00 	lds	r24, 0x0066
-  d4:	8a 30       	cpi	r24, 0x0A	; 10
-  d6:	11 f4       	brne	.+4      	; 0xdc <_Z7counterv+0x16>
-  d8:	10 92 66 00 	sts	0x0066, r1
-	return cnt0;
-  dc:	80 91 66 00 	lds	r24, 0x0066
+	return cnt0;*/
+
+	if (cnt0 > max) cnt0 = 0;
+  c8:	80 91 6c 00 	lds	r24, 0x006C
+  cc:	68 17       	cp	r22, r24
+  ce:	10 f4       	brcc	.+4      	; 0xd4 <_Z7counterhh+0xe>
+  d0:	10 92 6c 00 	sts	0x006C, r1
+	return cnt0++ > target;
+  d4:	90 91 6c 00 	lds	r25, 0x006C
+  d8:	81 e0       	ldi	r24, 0x01	; 1
+  da:	89 0f       	add	r24, r25
+  dc:	80 93 6c 00 	sts	0x006C, r24
+  e0:	81 e0       	ldi	r24, 0x01	; 1
+  e2:	29 17       	cp	r18, r25
+  e4:	08 f0       	brcs	.+2      	; 0xe8 <_Z7counterhh+0x22>
+  e6:	80 e0       	ldi	r24, 0x00	; 0
 }
-  e0:	90 e0       	ldi	r25, 0x00	; 0
-  e2:	08 95       	ret
+  e8:	08 95       	ret
 
-000000e4 <_Z13delay_counterv>:
+000000ea <_Z13delay_counterhh>:
 
-int
-delay_counter() //‘”Õ ÷»ﬂ Œ¡Õ”À≈Õ»ﬂ —◊®“◊» ¿
+bool
+delay_counter(uint8_t target, uint8_t max = 100) //‘”Õ ÷»ﬂ Œ¡Õ”À≈Õ»ﬂ —◊®“◊» ¿
 {
-	cnt2++;
-  e4:	80 91 64 00 	lds	r24, 0x0064
-  e8:	8f 5f       	subi	r24, 0xFF	; 255
-  ea:	80 93 64 00 	sts	0x0064, r24
+  ea:	28 2f       	mov	r18, r24
+	/*cnt2++;
 	if (cnt2 == 92) cnt2 = 0;
-  ee:	80 91 64 00 	lds	r24, 0x0064
-  f2:	8c 35       	cpi	r24, 0x5C	; 92
-  f4:	11 f4       	brne	.+4      	; 0xfa <_Z13delay_counterv+0x16>
-  f6:	10 92 64 00 	sts	0x0064, r1
-	return cnt2;
-  fa:	80 91 64 00 	lds	r24, 0x0064
+	return cnt2;*/
+
+	if (cnt2 > max) cnt2 = 0;
+  ec:	80 91 6a 00 	lds	r24, 0x006A
+  f0:	68 17       	cp	r22, r24
+  f2:	10 f4       	brcc	.+4      	; 0xf8 <_Z13delay_counterhh+0xe>
+  f4:	10 92 6a 00 	sts	0x006A, r1
+	return cnt2++ > target;
+  f8:	90 91 6a 00 	lds	r25, 0x006A
+  fc:	81 e0       	ldi	r24, 0x01	; 1
+  fe:	89 0f       	add	r24, r25
+ 100:	80 93 6a 00 	sts	0x006A, r24
+ 104:	81 e0       	ldi	r24, 0x01	; 1
+ 106:	29 17       	cp	r18, r25
+ 108:	08 f0       	brcs	.+2      	; 0x10c <_Z13delay_counterhh+0x22>
+ 10a:	80 e0       	ldi	r24, 0x00	; 0
 }
-  fe:	90 e0       	ldi	r25, 0x00	; 0
- 100:	08 95       	ret
+ 10c:	08 95       	ret
 
-00000102 <_Z11pwm_counterv>:
+0000010e <_Z11pwm_counterhh>:
 
-int
-pwm_counter() {
-	cnt1++;
- 102:	80 91 65 00 	lds	r24, 0x0065
- 106:	8f 5f       	subi	r24, 0xFF	; 255
- 108:	80 93 65 00 	sts	0x0065, r24
-	if (cnt1 == 20) cnt1 = 0;
- 10c:	80 91 65 00 	lds	r24, 0x0065
- 110:	84 31       	cpi	r24, 0x14	; 20
- 112:	11 f4       	brne	.+4      	; 0x118 <_Z11pwm_counterv+0x16>
- 114:	10 92 65 00 	sts	0x0065, r1
-	return cnt1;
- 118:	80 91 65 00 	lds	r24, 0x0065
+bool
+pwm_counter(uint8_t target, uint8_t max = 100)
+{
+ 10e:	28 2f       	mov	r18, r24
+	if (cnt1 > max) cnt1 = 0;
+ 110:	80 91 6b 00 	lds	r24, 0x006B
+ 114:	68 17       	cp	r22, r24
+ 116:	10 f4       	brcc	.+4      	; 0x11c <_Z11pwm_counterhh+0xe>
+ 118:	10 92 6b 00 	sts	0x006B, r1
+	return cnt1++ > target;
+ 11c:	90 91 6b 00 	lds	r25, 0x006B
+ 120:	81 e0       	ldi	r24, 0x01	; 1
+ 122:	89 0f       	add	r24, r25
+ 124:	80 93 6b 00 	sts	0x006B, r24
+ 128:	81 e0       	ldi	r24, 0x01	; 1
+ 12a:	29 17       	cp	r18, r25
+ 12c:	08 f0       	brcs	.+2      	; 0x130 <_Z11pwm_counterhh+0x22>
+ 12e:	80 e0       	ldi	r24, 0x00	; 0
 }
- 11c:	90 e0       	ldi	r25, 0x00	; 0
- 11e:	08 95       	ret
+ 130:	08 95       	ret
 
-00000120 <__vector_9>:
+00000132 <__vector_1>:
+
+ISR(INT0_vect)
+{
+ 132:	1f 92       	push	r1
+ 134:	0f 92       	push	r0
+ 136:	0f b6       	in	r0, 0x3f	; 63
+ 138:	0f 92       	push	r0
+ 13a:	11 24       	eor	r1, r1
+ 13c:	8f 93       	push	r24
+	speed_cnt_left++;
+ 13e:	80 91 67 00 	lds	r24, 0x0067
+ 142:	8f 5f       	subi	r24, 0xFF	; 255
+ 144:	80 93 67 00 	sts	0x0067, r24
+}
+ 148:	8f 91       	pop	r24
+ 14a:	0f 90       	pop	r0
+ 14c:	0f be       	out	0x3f, r0	; 63
+ 14e:	0f 90       	pop	r0
+ 150:	1f 90       	pop	r1
+ 152:	18 95       	reti
+
+00000154 <__vector_2>:
+
+ISR(INT1_vect)
+{
+ 154:	1f 92       	push	r1
+ 156:	0f 92       	push	r0
+ 158:	0f b6       	in	r0, 0x3f	; 63
+ 15a:	0f 92       	push	r0
+ 15c:	11 24       	eor	r1, r1
+ 15e:	8f 93       	push	r24
+	speed_cnt_right++;
+ 160:	80 91 66 00 	lds	r24, 0x0066
+ 164:	8f 5f       	subi	r24, 0xFF	; 255
+ 166:	80 93 66 00 	sts	0x0066, r24
+}
+ 16a:	8f 91       	pop	r24
+ 16c:	0f 90       	pop	r0
+ 16e:	0f be       	out	0x3f, r0	; 63
+ 170:	0f 90       	pop	r0
+ 172:	1f 90       	pop	r1
+ 174:	18 95       	reti
+
+00000176 <__vector_9>:
 
 ISR(TIMER0_OVF_vect)
 {
- 120:	1f 92       	push	r1
- 122:	0f 92       	push	r0
- 124:	0f b6       	in	r0, 0x3f	; 63
- 126:	0f 92       	push	r0
- 128:	11 24       	eor	r1, r1
- 12a:	2f 93       	push	r18
- 12c:	3f 93       	push	r19
- 12e:	4f 93       	push	r20
- 130:	5f 93       	push	r21
- 132:	6f 93       	push	r22
- 134:	7f 93       	push	r23
- 136:	8f 93       	push	r24
- 138:	9f 93       	push	r25
- 13a:	af 93       	push	r26
- 13c:	bf 93       	push	r27
- 13e:	cf 93       	push	r28
- 140:	ef 93       	push	r30
- 142:	ff 93       	push	r31
+ 176:	1f 92       	push	r1
+ 178:	0f 92       	push	r0
+ 17a:	0f b6       	in	r0, 0x3f	; 63
+ 17c:	0f 92       	push	r0
+ 17e:	11 24       	eor	r1, r1
+ 180:	2f 93       	push	r18
+ 182:	3f 93       	push	r19
+ 184:	4f 93       	push	r20
+ 186:	5f 93       	push	r21
+ 188:	6f 93       	push	r22
+ 18a:	7f 93       	push	r23
+ 18c:	8f 93       	push	r24
+ 18e:	9f 93       	push	r25
+ 190:	af 93       	push	r26
+ 192:	bf 93       	push	r27
+ 194:	cf 93       	push	r28
+ 196:	ef 93       	push	r30
+ 198:	ff 93       	push	r31
+	speed_left = speed_cnt_left * dt;
+ 19a:	80 91 67 00 	lds	r24, 0x0067
+ 19e:	80 93 65 00 	sts	0x0065, r24
+	speed_right = speed_cnt_right * dt;
+ 1a2:	80 91 66 00 	lds	r24, 0x0066
+ 1a6:	80 93 64 00 	sts	0x0064, r24
+
+	speed_cnt_left = 0;
+ 1aa:	10 92 67 00 	sts	0x0067, r1
+	speed_cnt_right = 0;
+ 1ae:	10 92 66 00 	sts	0x0066, r1
+
+	pwm_left  += k * (desired_speed - speed_left);
+ 1b2:	20 91 65 00 	lds	r18, 0x0065
+ 1b6:	40 91 63 00 	lds	r20, 0x0063
+ 1ba:	8e e1       	ldi	r24, 0x1E	; 30
+ 1bc:	90 e0       	ldi	r25, 0x00	; 0
+ 1be:	bc 01       	movw	r22, r24
+ 1c0:	62 1b       	sub	r22, r18
+ 1c2:	71 09       	sbc	r23, r1
+ 1c4:	9b 01       	movw	r18, r22
+ 1c6:	24 0f       	add	r18, r20
+ 1c8:	31 1d       	adc	r19, r1
+ 1ca:	20 93 63 00 	sts	0x0063, r18
+	pwm_right += k * (desired_speed - speed_right);
+ 1ce:	30 91 64 00 	lds	r19, 0x0064
+ 1d2:	20 91 62 00 	lds	r18, 0x0062
+ 1d6:	83 1b       	sub	r24, r19
+ 1d8:	91 09       	sbc	r25, r1
+ 1da:	82 0f       	add	r24, r18
+ 1dc:	91 1d       	adc	r25, r1
+ 1de:	80 93 62 00 	sts	0x0062, r24
+
 	switch(cmd) {
- 144:	80 91 68 00 	lds	r24, 0x0068
- 148:	90 e0       	ldi	r25, 0x00	; 0
- 14a:	89 30       	cpi	r24, 0x09	; 9
- 14c:	91 05       	cpc	r25, r1
- 14e:	08 f0       	brcs	.+2      	; 0x152 <__vector_9+0x32>
- 150:	5c c0       	rjmp	.+184    	; 0x20a <__vector_9+0xea>
- 152:	fc 01       	movw	r30, r24
- 154:	e6 5d       	subi	r30, 0xD6	; 214
- 156:	ff 4f       	sbci	r31, 0xFF	; 255
- 158:	93 c0       	rjmp	.+294    	; 0x280 <__tablejump2__>
- 15a:	c4 9a       	sbi	0x18, 4	; 24
+ 1e2:	80 91 6e 00 	lds	r24, 0x006E
+ 1e6:	90 e0       	ldi	r25, 0x00	; 0
+ 1e8:	89 30       	cpi	r24, 0x09	; 9
+ 1ea:	91 05       	cpc	r25, r1
+ 1ec:	08 f0       	brcs	.+2      	; 0x1f0 <__vector_9+0x7a>
+ 1ee:	6b c0       	rjmp	.+214    	; 0x2c6 <__vector_9+0x150>
+ 1f0:	fc 01       	movw	r30, r24
+ 1f2:	e6 5d       	subi	r30, 0xD6	; 214
+ 1f4:	ff 4f       	sbci	r31, 0xFF	; 255
+ 1f6:	a0 c0       	rjmp	.+320    	; 0x338 <__tablejump2__>
+ 1f8:	c4 9a       	sbi	0x18, 4	; 24
 	case 0: //¬ Àﬁ◊≈Õ»≈ À≈¬Œ√Œ ƒ¿“◊» ¿
 		DETECTOR_PORT |= _BV(COM_DETECTOR_OUTPUT_LEFT);
- 15c:	81 e0       	ldi	r24, 0x01	; 1
+ 1fa:	81 e0       	ldi	r24, 0x01	; 1
 		cmd = 1;
- 15e:	80 93 68 00 	sts	0x0068, r24
- 162:	53 c0       	rjmp	.+166    	; 0x20a <__vector_9+0xea>
+ 1fc:	80 93 6e 00 	sts	0x006E, r24
+ 200:	62 c0       	rjmp	.+196    	; 0x2c6 <__vector_9+0x150>
 		break;
- 164:	b0 df       	rcall	.-160    	; 0xc6 <_Z7counterv>
+ 202:	64 e6       	ldi	r22, 0x64	; 100
 	case 1: //Õ»◊≈√Œ Õ≈ ƒ≈À¿“‹
-		if (counter() > 8) cmd = 2;
- 166:	09 97       	sbiw	r24, 0x09	; 9
- 168:	0c f4       	brge	.+2      	; 0x16c <__vector_9+0x4c>
- 16a:	4f c0       	rjmp	.+158    	; 0x20a <__vector_9+0xea>
- 16c:	82 e0       	ldi	r24, 0x02	; 2
- 16e:	80 93 68 00 	sts	0x0068, r24
- 172:	4b c0       	rjmp	.+150    	; 0x20a <__vector_9+0xea>
- 174:	b2 9b       	sbis	0x16, 2	; 22
- 176:	03 c0       	rjmp	.+6      	; 0x17e <__vector_9+0x5e>
+		if (counter(8)) cmd = 2;
+ 204:	88 e0       	ldi	r24, 0x08	; 8
+ 206:	5f df       	rcall	.-322    	; 0xc6 <_Z7counterhh>
+ 208:	88 23       	and	r24, r24
+ 20a:	09 f4       	brne	.+2      	; 0x20e <__vector_9+0x98>
+ 20c:	5c c0       	rjmp	.+184    	; 0x2c6 <__vector_9+0x150>
+ 20e:	82 e0       	ldi	r24, 0x02	; 2
+ 210:	80 93 6e 00 	sts	0x006E, r24
+ 214:	58 c0       	rjmp	.+176    	; 0x2c6 <__vector_9+0x150>
+ 216:	b2 9b       	sbis	0x16, 2	; 22
+ 218:	03 c0       	rjmp	.+6      	; 0x220 <__vector_9+0xaa>
 		break;
 	case 2: // —◊»“€¬¿≈Õ»≈ »« À≈¬Œ√Œ ƒ¿“◊» ¿
 		if (DETECTOR_PIN & _BV(COM_DETECTOR_INPUT)) right_wh = true;//ENGINE_PORT |= _BV(ENGINE_RIGHT)
- 178:	81 e0       	ldi	r24, 0x01	; 1
- 17a:	80 93 60 00 	sts	0x0060, r24
- 17e:	80 91 60 00 	lds	r24, 0x0060
+ 21a:	81 e0       	ldi	r24, 0x01	; 1
+ 21c:	80 93 60 00 	sts	0x0060, r24
+ 220:	80 91 60 00 	lds	r24, 0x0060
 		//if (detector == 0b00000100) right_wh = true;
 		if(!right_wh) right_engine_run = false;
- 182:	81 11       	cpse	r24, r1
- 184:	02 c0       	rjmp	.+4      	; 0x18a <__vector_9+0x6a>
- 186:	10 92 62 00 	sts	0x0062, r1
- 18a:	83 e0       	ldi	r24, 0x03	; 3
- 18c:	80 93 68 00 	sts	0x0068, r24
+ 224:	81 11       	cpse	r24, r1
+ 226:	02 c0       	rjmp	.+4      	; 0x22c <__vector_9+0xb6>
+ 228:	10 92 68 00 	sts	0x0068, r1
+ 22c:	83 e0       	ldi	r24, 0x03	; 3
+ 22e:	80 93 6e 00 	sts	0x006E, r24
 		cmd = 3;
- 190:	3c c0       	rjmp	.+120    	; 0x20a <__vector_9+0xea>
- 192:	c4 98       	cbi	0x18, 4	; 24
+ 232:	49 c0       	rjmp	.+146    	; 0x2c6 <__vector_9+0x150>
+ 234:	c4 98       	cbi	0x18, 4	; 24
 		break;
- 194:	84 e0       	ldi	r24, 0x04	; 4
+ 236:	84 e0       	ldi	r24, 0x04	; 4
 	case 3: //¬€ Àﬁ◊≈Õ»≈ À≈¬Œ√Œ ƒ¿“◊» ¿
 		DETECTOR_PORT &= ~(_BV(COM_DETECTOR_OUTPUT_LEFT));
- 196:	80 93 68 00 	sts	0x0068, r24
+ 238:	80 93 6e 00 	sts	0x006E, r24
 		cmd = 4;
- 19a:	37 c0       	rjmp	.+110    	; 0x20a <__vector_9+0xea>
- 19c:	c1 9a       	sbi	0x18, 1	; 24
+ 23c:	44 c0       	rjmp	.+136    	; 0x2c6 <__vector_9+0x150>
+ 23e:	c1 9a       	sbi	0x18, 1	; 24
 		break;
- 19e:	85 e0       	ldi	r24, 0x05	; 5
+ 240:	85 e0       	ldi	r24, 0x05	; 5
 	case 4:
 		DETECTOR_PORT |= _BV(COM_DETECTOR_OUTPUT_RIGHT);
- 1a0:	80 93 68 00 	sts	0x0068, r24
+ 242:	80 93 6e 00 	sts	0x006E, r24
 		cmd = 5;
- 1a4:	32 c0       	rjmp	.+100    	; 0x20a <__vector_9+0xea>
- 1a6:	8f df       	rcall	.-226    	; 0xc6 <_Z7counterv>
+ 246:	3f c0       	rjmp	.+126    	; 0x2c6 <__vector_9+0x150>
+ 248:	64 e6       	ldi	r22, 0x64	; 100
 		break;
- 1a8:	09 97       	sbiw	r24, 0x09	; 9
+ 24a:	88 e0       	ldi	r24, 0x08	; 8
 	case 5:
-		if(counter() > 8) cmd = 6;
- 1aa:	7c f1       	brlt	.+94     	; 0x20a <__vector_9+0xea>
- 1ac:	86 e0       	ldi	r24, 0x06	; 6
- 1ae:	80 93 68 00 	sts	0x0068, r24
- 1b2:	2b c0       	rjmp	.+86     	; 0x20a <__vector_9+0xea>
- 1b4:	b2 9b       	sbis	0x16, 2	; 22
- 1b6:	03 c0       	rjmp	.+6      	; 0x1be <__vector_9+0x9e>
- 1b8:	81 e0       	ldi	r24, 0x01	; 1
+		if(counter(8)) cmd = 6;
+ 24c:	3c df       	rcall	.-392    	; 0xc6 <_Z7counterhh>
+ 24e:	88 23       	and	r24, r24
+ 250:	d1 f1       	breq	.+116    	; 0x2c6 <__vector_9+0x150>
+ 252:	86 e0       	ldi	r24, 0x06	; 6
+ 254:	80 93 6e 00 	sts	0x006E, r24
+ 258:	36 c0       	rjmp	.+108    	; 0x2c6 <__vector_9+0x150>
+ 25a:	b2 9b       	sbis	0x16, 2	; 22
+ 25c:	03 c0       	rjmp	.+6      	; 0x264 <__vector_9+0xee>
+ 25e:	81 e0       	ldi	r24, 0x01	; 1
 		break;
 	case 6:
 		if (DETECTOR_PIN & _BV(COM_DETECTOR_INPUT)) left_wh = true;
- 1ba:	80 93 61 00 	sts	0x0061, r24
- 1be:	80 91 61 00 	lds	r24, 0x0061
- 1c2:	81 11       	cpse	r24, r1
+ 260:	80 93 61 00 	sts	0x0061, r24
+ 264:	80 91 61 00 	lds	r24, 0x0061
+ 268:	81 11       	cpse	r24, r1
 		//if (detector == 0b00000100) left_wh = true;
 		if(!left_wh) left_engine_run = false;
- 1c4:	02 c0       	rjmp	.+4      	; 0x1ca <__vector_9+0xaa>
- 1c6:	10 92 63 00 	sts	0x0063, r1
- 1ca:	87 e0       	ldi	r24, 0x07	; 7
- 1cc:	80 93 68 00 	sts	0x0068, r24
+ 26a:	02 c0       	rjmp	.+4      	; 0x270 <__vector_9+0xfa>
+ 26c:	10 92 69 00 	sts	0x0069, r1
+ 270:	87 e0       	ldi	r24, 0x07	; 7
+ 272:	80 93 6e 00 	sts	0x006E, r24
 		cmd = 7;
- 1d0:	1c c0       	rjmp	.+56     	; 0x20a <__vector_9+0xea>
- 1d2:	c1 98       	cbi	0x18, 1	; 24
- 1d4:	88 e0       	ldi	r24, 0x08	; 8
+ 276:	27 c0       	rjmp	.+78     	; 0x2c6 <__vector_9+0x150>
+ 278:	c1 98       	cbi	0x18, 1	; 24
+ 27a:	88 e0       	ldi	r24, 0x08	; 8
 		break;
- 1d6:	80 93 68 00 	sts	0x0068, r24
+ 27c:	80 93 6e 00 	sts	0x006E, r24
 	case 7:
 		DETECTOR_PORT &= ~(_BV(COM_DETECTOR_OUTPUT_RIGHT));
 		cmd = 8;
- 1da:	17 c0       	rjmp	.+46     	; 0x20a <__vector_9+0xea>
- 1dc:	80 91 61 00 	lds	r24, 0x0061
+ 280:	22 c0       	rjmp	.+68     	; 0x2c6 <__vector_9+0x150>
+ 282:	80 91 61 00 	lds	r24, 0x0061
 		break;
- 1e0:	88 23       	and	r24, r24
+ 286:	88 23       	and	r24, r24
 	case 8:
 		if(left_wh) {
- 1e2:	19 f0       	breq	.+6      	; 0x1ea <__vector_9+0xca>
- 1e4:	81 e0       	ldi	r24, 0x01	; 1
- 1e6:	80 93 63 00 	sts	0x0063, r24
+ 288:	19 f0       	breq	.+6      	; 0x290 <__vector_9+0x11a>
+ 28a:	81 e0       	ldi	r24, 0x01	; 1
+ 28c:	80 93 69 00 	sts	0x0069, r24
 			left_engine_run = true;
- 1ea:	80 91 60 00 	lds	r24, 0x0060
- 1ee:	88 23       	and	r24, r24
+ 290:	80 91 60 00 	lds	r24, 0x0060
+ 294:	88 23       	and	r24, r24
 			//ENGINE_PORT |= _BV(ENGINE_LEFT);
 		}
 		if(right_wh) {
- 1f0:	19 f0       	breq	.+6      	; 0x1f8 <__vector_9+0xd8>
- 1f2:	81 e0       	ldi	r24, 0x01	; 1
- 1f4:	80 93 62 00 	sts	0x0062, r24
+ 296:	19 f0       	breq	.+6      	; 0x29e <__vector_9+0x128>
+ 298:	81 e0       	ldi	r24, 0x01	; 1
+ 29a:	80 93 68 00 	sts	0x0068, r24
 			right_engine_run = true;
- 1f8:	75 df       	rcall	.-278    	; 0xe4 <_Z13delay_counterv>
- 1fa:	4f 97       	sbiw	r24, 0x1f	; 31
- 1fc:	34 f0       	brlt	.+12     	; 0x20a <__vector_9+0xea>
+ 29e:	80 91 63 00 	lds	r24, 0x0063
+ 2a2:	64 e6       	ldi	r22, 0x64	; 100
 			//ENGINE_PORT |= _BV(ENGINE_RIGHT);
 		}
-		if(delay_counter() > 30) {
- 1fe:	10 92 68 00 	sts	0x0068, r1
- 202:	10 92 60 00 	sts	0x0060, r1
+		if(delay_counter(pwm_left)) {
+ 2a4:	22 df       	rcall	.-444    	; 0xea <_Z13delay_counterhh>
+ 2a6:	88 23       	and	r24, r24
+ 2a8:	21 f0       	breq	.+8      	; 0x2b2 <__vector_9+0x13c>
+ 2aa:	10 92 6e 00 	sts	0x006E, r1
+ 2ae:	10 92 61 00 	sts	0x0061, r1
 			cmd = 0;
- 206:	10 92 61 00 	sts	0x0061, r1
-			right_wh = false;
- 20a:	c0 91 63 00 	lds	r28, 0x0063
+ 2b2:	80 91 62 00 	lds	r24, 0x0062
 			left_wh = false;
- 20e:	79 df       	rcall	.-270    	; 0x102 <_Z11pwm_counterv>
- 210:	21 e0       	ldi	r18, 0x01	; 1
+ 2b6:	64 e6       	ldi	r22, 0x64	; 100
+ 2b8:	18 df       	rcall	.-464    	; 0xea <_Z13delay_counterhh>
 		}
-
+		if (delay_counter(pwm_right))
+ 2ba:	88 23       	and	r24, r24
+ 2bc:	21 f0       	breq	.+8      	; 0x2c6 <__vector_9+0x150>
+ 2be:	10 92 6e 00 	sts	0x006E, r1
+ 2c2:	10 92 60 00 	sts	0x0060, r1
+ 2c6:	c0 91 69 00 	lds	r28, 0x0069
+		{
+			cmd = 0;
+ 2ca:	80 91 63 00 	lds	r24, 0x0063
+			right_wh = false;
+ 2ce:	64 e6       	ldi	r22, 0x64	; 100
+		}
 	}
-	if (left_engine_run & (pwm_counter() < 5)) ENGINE_PORT |= _BV(ENGINE_LEFT);
- 212:	05 97       	sbiw	r24, 0x05	; 5
- 214:	0c f0       	brlt	.+2      	; 0x218 <__vector_9+0xf8>
- 216:	20 e0       	ldi	r18, 0x00	; 0
- 218:	22 23       	and	r18, r18
- 21a:	21 f0       	breq	.+8      	; 0x224 <__vector_9+0x104>
- 21c:	cc 23       	and	r28, r28
- 21e:	11 f0       	breq	.+4      	; 0x224 <__vector_9+0x104>
- 220:	97 9a       	sbi	0x12, 7	; 18
- 222:	01 c0       	rjmp	.+2      	; 0x226 <__vector_9+0x106>
- 224:	97 98       	cbi	0x12, 7	; 18
- 226:	c0 91 62 00 	lds	r28, 0x0062
- 22a:	6b df       	rcall	.-298    	; 0x102 <_Z11pwm_counterv>
- 22c:	21 e0       	ldi	r18, 0x01	; 1
+	if (left_engine_run & pwm_counter(pwm_left)) ENGINE_PORT |= _BV(ENGINE_LEFT);
+ 2d0:	1e df       	rcall	.-452    	; 0x10e <_Z11pwm_counterhh>
+ 2d2:	88 23       	and	r24, r24
+ 2d4:	21 f0       	breq	.+8      	; 0x2de <__vector_9+0x168>
+ 2d6:	cc 23       	and	r28, r28
+ 2d8:	11 f0       	breq	.+4      	; 0x2de <__vector_9+0x168>
+ 2da:	97 9a       	sbi	0x12, 7	; 18
+ 2dc:	01 c0       	rjmp	.+2      	; 0x2e0 <__vector_9+0x16a>
+ 2de:	97 98       	cbi	0x12, 7	; 18
+ 2e0:	c0 91 68 00 	lds	r28, 0x0068
+ 2e4:	80 91 62 00 	lds	r24, 0x0062
+ 2e8:	64 e6       	ldi	r22, 0x64	; 100
 	else ENGINE_PORT &= ~_BV(ENGINE_LEFT);
- 22e:	05 97       	sbiw	r24, 0x05	; 5
+ 2ea:	11 df       	rcall	.-478    	; 0x10e <_Z11pwm_counterhh>
 
-	if (right_engine_run & (pwm_counter() < 5)) ENGINE_PORT |= _BV(ENGINE_RIGHT);
- 230:	0c f0       	brlt	.+2      	; 0x234 <__vector_9+0x114>
- 232:	20 e0       	ldi	r18, 0x00	; 0
- 234:	22 23       	and	r18, r18
- 236:	21 f0       	breq	.+8      	; 0x240 <__vector_9+0x120>
- 238:	cc 23       	and	r28, r28
- 23a:	11 f0       	breq	.+4      	; 0x240 <__vector_9+0x120>
- 23c:	95 9a       	sbi	0x12, 5	; 18
- 23e:	01 c0       	rjmp	.+2      	; 0x242 <__vector_9+0x122>
- 240:	95 98       	cbi	0x12, 5	; 18
- 242:	ff 91       	pop	r31
- 244:	ef 91       	pop	r30
- 246:	cf 91       	pop	r28
- 248:	bf 91       	pop	r27
- 24a:	af 91       	pop	r26
+	if (right_engine_run & pwm_counter(pwm_right)) ENGINE_PORT |= _BV(ENGINE_RIGHT);
+ 2ec:	88 23       	and	r24, r24
+ 2ee:	21 f0       	breq	.+8      	; 0x2f8 <__vector_9+0x182>
+ 2f0:	cc 23       	and	r28, r28
+ 2f2:	11 f0       	breq	.+4      	; 0x2f8 <__vector_9+0x182>
+ 2f4:	95 9a       	sbi	0x12, 5	; 18
+ 2f6:	01 c0       	rjmp	.+2      	; 0x2fa <__vector_9+0x184>
+ 2f8:	95 98       	cbi	0x12, 5	; 18
+ 2fa:	ff 91       	pop	r31
+ 2fc:	ef 91       	pop	r30
+ 2fe:	cf 91       	pop	r28
+ 300:	bf 91       	pop	r27
+ 302:	af 91       	pop	r26
+ 304:	9f 91       	pop	r25
 	else ENGINE_PORT &= ~_BV(ENGINE_RIGHT);
- 24c:	9f 91       	pop	r25
-}
- 24e:	8f 91       	pop	r24
- 250:	7f 91       	pop	r23
- 252:	6f 91       	pop	r22
- 254:	5f 91       	pop	r21
- 256:	4f 91       	pop	r20
- 258:	3f 91       	pop	r19
- 25a:	2f 91       	pop	r18
- 25c:	0f 90       	pop	r0
- 25e:	0f be       	out	0x3f, r0	; 63
- 260:	0f 90       	pop	r0
- 262:	1f 90       	pop	r1
- 264:	18 95       	reti
+ 306:	8f 91       	pop	r24
 
-00000266 <main>:
+}
+ 308:	7f 91       	pop	r23
+ 30a:	6f 91       	pop	r22
+ 30c:	5f 91       	pop	r21
+ 30e:	4f 91       	pop	r20
+ 310:	3f 91       	pop	r19
+ 312:	2f 91       	pop	r18
+ 314:	0f 90       	pop	r0
+ 316:	0f be       	out	0x3f, r0	; 63
+ 318:	0f 90       	pop	r0
+ 31a:	1f 90       	pop	r1
+ 31c:	18 95       	reti
+
+0000031e <main>:
 
 int
 main(void)
 {
 	cli();
- 266:	f8 94       	cli
+ 31e:	f8 94       	cli
 
 	configure_pins();
- 268:	1a df       	rcall	.-460    	; 0x9e <_Z14configure_pinsv>
- 26a:	27 df       	rcall	.-434    	; 0xba <_Z15configure_timerv>
+ 320:	be de       	rcall	.-644    	; 0x9e <_Z14configure_pinsv>
+ 322:	cb de       	rcall	.-618    	; 0xba <_Z15configure_timerv>
 	configure_timer();
- 26c:	78 94       	sei
- 26e:	86 b3       	in	r24, 0x16	; 22
+ 324:	78 94       	sei
+ 326:	86 b3       	in	r24, 0x16	; 22
 
 	sei();
- 270:	80 93 67 00 	sts	0x0067, r24
+ 328:	80 93 6d 00 	sts	0x006D, r24
 
 	while (1)
 	{
 		detector = DETECTOR_PIN;
- 274:	80 91 67 00 	lds	r24, 0x0067
+ 32c:	80 91 6d 00 	lds	r24, 0x006D
 		detector &= 0b00000100;
- 278:	84 70       	andi	r24, 0x04	; 4
- 27a:	80 93 67 00 	sts	0x0067, r24
- 27e:	f7 cf       	rjmp	.-18     	; 0x26e <main+0x8>
+ 330:	84 70       	andi	r24, 0x04	; 4
+ 332:	80 93 6d 00 	sts	0x006D, r24
+ 336:	f7 cf       	rjmp	.-18     	; 0x326 <main+0x8>
 
-00000280 <__tablejump2__>:
- 280:	ee 0f       	add	r30, r30
- 282:	ff 1f       	adc	r31, r31
+00000338 <__tablejump2__>:
+ 338:	ee 0f       	add	r30, r30
+ 33a:	ff 1f       	adc	r31, r31
 
-00000284 <__tablejump__>:
- 284:	05 90       	lpm	r0, Z+
- 286:	f4 91       	lpm	r31, Z
- 288:	e0 2d       	mov	r30, r0
- 28a:	09 94       	ijmp
+0000033c <__tablejump__>:
+ 33c:	05 90       	lpm	r0, Z+
+ 33e:	f4 91       	lpm	r31, Z
+ 340:	e0 2d       	mov	r30, r0
+ 342:	09 94       	ijmp
 
-0000028c <_exit>:
- 28c:	f8 94       	cli
+00000344 <_exit>:
+ 344:	f8 94       	cli
 
-0000028e <__stop_program>:
- 28e:	ff cf       	rjmp	.-2      	; 0x28e <__stop_program>
+00000346 <__stop_program>:
+ 346:	ff cf       	rjmp	.-2      	; 0x346 <__stop_program>
