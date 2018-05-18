@@ -1,4 +1,4 @@
-#include <avr/io.h>
+Ôªø#include <avr/io.h>
 #include <avr/common.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
@@ -9,9 +9,9 @@
 
 #define DETECTOR_PIN PINB
 
-#define COM_DETECTOR_INPUT PB2 //◊“≈Õ»≈
+#define COM_DETECTOR_INPUT PB2 //–ß–¢–ï–ù–ò–ï
 
-//«¿œ»—‹
+//–ó–ê–ü–ò–°–¨
 #define COM_DETECTOR_OUTPUT_LEFT PB4
 #define COM_DETECTOR_OUTPUT_RIGHT PB1
 
@@ -61,11 +61,11 @@ uint8_t desired_speed_right = desired_speed;
 void
 configure_pins()
 {
-	DETECTOR_DIR |= (_BV(COM_DETECTOR_OUTPUT_LEFT) | _BV(COM_DETECTOR_OUTPUT_RIGHT)); //0 - Õ¿—“–Œ… ¿ œ»Õ¿ Õ¿ «¿œ»—‹
-	DETECTOR_DIR &= ~_BV(COM_DETECTOR_INPUT); //1 - Õ¿—“–Œ… ¿ œ»Õ¿ Õ¿ ◊“≈Õ»≈
+	DETECTOR_DIR |= (_BV(COM_DETECTOR_OUTPUT_LEFT) | _BV(COM_DETECTOR_OUTPUT_RIGHT)); //0 - –ù–ê–°–¢–†–û–ô–ö–ê –ü–ò–ù–ê –ù–ê –ó–ê–ü–ò–°–¨
+	DETECTOR_DIR &= ~_BV(COM_DETECTOR_INPUT); //1 - –ù–ê–°–¢–†–û–ô–ö–ê –ü–ò–ù–ê –ù–ê –ß–¢–ï–ù–ò–ï
 
-	DETECTOR_PORT &= ~(_BV(COM_DETECTOR_OUTPUT_LEFT) | _BV(COM_DETECTOR_OUTPUT_RIGHT)); //«¿œ»—€¬¿≈Ã ¬ œŒ–“ Õ”À»
-	//DETECTOR_PIN &= ~(_BV(COM_DETECTOR_INPUT)); //«¿œ»€¬¿≈Ã ¬ œ»Õ ÕŒÀ‹
+	DETECTOR_PORT &= ~(_BV(COM_DETECTOR_OUTPUT_LEFT) | _BV(COM_DETECTOR_OUTPUT_RIGHT)); //–ó–ê–ü–ò–°–´–í–ê–ï–ú –í –ü–û–†–¢ –ù–£–õ–ò
+	//DETECTOR_PIN &= ~(_BV(COM_DETECTOR_INPUT)); //–ó–ê–ü–ò–´–í–ê–ï–ú –í –ü–ò–ù –ù–û–õ–¨
 	ENGINE_DIR |= _BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT);
 	ENGINE_PORT &= ~(_BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT));
 }
@@ -78,7 +78,7 @@ configure_timer()
 }
 
 bool
-counter(uint8_t target, uint8_t max = 100) //‘”Õ ÷»ﬂ Œ¡Õ”À≈Õ»ﬂ —◊®“◊» ¿
+counter(uint8_t target, uint8_t max = 100) //–§–£–ù–ö–¶–ò–Ø –û–ë–ù–£–õ–ï–ù–ò–Ø –°–ß–Å–¢–ß–ò–ö–ê
 {
 	/*cnt0++;
 	if (cnt0 == 10) cnt0 = 0;
@@ -89,7 +89,7 @@ counter(uint8_t target, uint8_t max = 100) //‘”Õ ÷»ﬂ Œ¡Õ”À≈Õ»ﬂ —◊®“◊» ¿
 }
 
 bool
-delay_counter(uint8_t target, uint8_t max = 100) //‘”Õ ÷»ﬂ Œ¡Õ”À≈Õ»ﬂ —◊®“◊» ¿
+delay_counter(uint8_t target, uint8_t max = 100) //–§–£–ù–ö–¶–ò–Ø –û–ë–ù–£–õ–ï–ù–ò–Ø –°–ß–Å–¢–ß–ò–ö–ê
 {
 	/*cnt2++;
 	if (cnt2 == 92) cnt2 = 0;
@@ -128,20 +128,20 @@ ISR(TIMER0_OVF_vect)
 	pwm_right += k * (desired_speed_right - speed_right);
 
 	switch(cmd) {
-	case 0: //¬ Àﬁ◊≈Õ»≈ À≈¬Œ√Œ ƒ¿“◊» ¿
+	case 0: //–í–ö–õ–Æ–ß–ï–ù–ò–ï –õ–ï–í–û–ì–û –î–ê–¢–ß–ò–ö–ê
 		DETECTOR_PORT |= _BV(COM_DETECTOR_OUTPUT_LEFT);
 		cmd = 1;
 		break;
-	case 1: //Õ»◊≈√Œ Õ≈ ƒ≈À¿“‹
+	case 1: //–ù–ò–ß–ï–ì–û –ù–ï –î–ï–õ–ê–¢–¨
 		if (counter(8)) cmd = 2;
 		break;
-	case 2: // —◊»“€¬¿≈Õ»≈ »« À≈¬Œ√Œ ƒ¿“◊» ¿
+	case 2: // –°–ß–ò–¢–´–í–ê–ï–ù–ò–ï –ò–ó –õ–ï–í–û–ì–û –î–ê–¢–ß–ò–ö–ê
 		if (DETECTOR_PIN & _BV(COM_DETECTOR_INPUT)) right_wh = true;//ENGINE_PORT |= _BV(ENGINE_RIGHT)
 		//if (detector == 0b00000100) right_wh = true;
 		if(!right_wh) right_engine_run = false;
 		cmd = 3;
 		break;
-	case 3: //¬€ Àﬁ◊≈Õ»≈ À≈¬Œ√Œ ƒ¿“◊» ¿
+	case 3: //–í–´–ö–õ–Æ–ß–ï–ù–ò–ï –õ–ï–í–û–ì–û –î–ê–¢–ß–ò–ö–ê
 		DETECTOR_PORT &= ~(_BV(COM_DETECTOR_OUTPUT_LEFT));
 		cmd = 4;
 		break;

@@ -1,4 +1,4 @@
-
+Ôªø
 AVR_car.elf:     file format elf32-avr
 
 Sections:
@@ -117,18 +117,18 @@ uint8_t desired_speed_right = desired_speed;
 void
 configure_pins()
 {
-	DETECTOR_DIR |= (_BV(COM_DETECTOR_OUTPUT_LEFT) | _BV(COM_DETECTOR_OUTPUT_RIGHT)); //0 - Õ¿—“–Œ… ¿ œ»Õ¿ Õ¿ «¿œ»—‹
+	DETECTOR_DIR |= (_BV(COM_DETECTOR_OUTPUT_LEFT) | _BV(COM_DETECTOR_OUTPUT_RIGHT)); //0 - –ù–ê–°–¢–†–û–ô–ö–ê –ü–ò–ù–ê –ù–ê –ó–ê–ü–ò–°–¨
   9e:	87 b3       	in	r24, 0x17	; 23
   a0:	82 61       	ori	r24, 0x12	; 18
   a2:	87 bb       	out	0x17, r24	; 23
-	DETECTOR_DIR &= ~_BV(COM_DETECTOR_INPUT); //1 - Õ¿—“–Œ… ¿ œ»Õ¿ Õ¿ ◊“≈Õ»≈
+	DETECTOR_DIR &= ~_BV(COM_DETECTOR_INPUT); //1 - –ù–ê–°–¢–†–û–ô–ö–ê –ü–ò–ù–ê –ù–ê –ß–¢–ï–ù–ò–ï
   a4:	ba 98       	cbi	0x17, 2	; 23
 
-	DETECTOR_PORT &= ~(_BV(COM_DETECTOR_OUTPUT_LEFT) | _BV(COM_DETECTOR_OUTPUT_RIGHT)); //«¿œ»—€¬¿≈Ã ¬ œŒ–“ Õ”À»
+	DETECTOR_PORT &= ~(_BV(COM_DETECTOR_OUTPUT_LEFT) | _BV(COM_DETECTOR_OUTPUT_RIGHT)); //–ó–ê–ü–ò–°–´–í–ê–ï–ú –í –ü–û–†–¢ –ù–£–õ–ò
   a6:	88 b3       	in	r24, 0x18	; 24
   a8:	8d 7e       	andi	r24, 0xED	; 237
   aa:	88 bb       	out	0x18, r24	; 24
-	//DETECTOR_PIN &= ~(_BV(COM_DETECTOR_INPUT)); //«¿œ»€¬¿≈Ã ¬ œ»Õ ÕŒÀ‹
+	//DETECTOR_PIN &= ~(_BV(COM_DETECTOR_INPUT)); //–ó–ê–ü–ò–´–í–ê–ï–ú –í –ü–ò–ù –ù–û–õ–¨
 	ENGINE_DIR |= _BV(ENGINE_LEFT) | _BV(ENGINE_RIGHT);
   ac:	81 b3       	in	r24, 0x11	; 17
   ae:	80 6a       	ori	r24, 0xA0	; 160
@@ -158,7 +158,7 @@ configure_timer()
 }
 
 bool
-counter(uint8_t target, uint8_t max = 100) //‘”Õ ÷»ﬂ Œ¡Õ”À≈Õ»ﬂ —◊®“◊» ¿
+counter(uint8_t target, uint8_t max = 100) //–§–£–ù–ö–¶–ò–Ø –û–ë–ù–£–õ–ï–ù–ò–Ø –°–ß–Å–¢–ß–ò–ö–ê
 {
   c6:	28 2f       	mov	r18, r24
 	/*cnt0++;
@@ -185,7 +185,7 @@ counter(uint8_t target, uint8_t max = 100) //‘”Õ ÷»ﬂ Œ¡Õ”À≈Õ»ﬂ —◊®“◊» ¿
 000000ea <_Z13delay_counterhh>:
 
 bool
-delay_counter(uint8_t target, uint8_t max = 100) //‘”Õ ÷»ﬂ Œ¡Õ”À≈Õ»ﬂ —◊®“◊» ¿
+delay_counter(uint8_t target, uint8_t max = 100) //–§–£–ù–ö–¶–ò–Ø –û–ë–ù–£–õ–ï–ù–ò–Ø –°–ß–Å–¢–ß–ò–ö–ê
 {
   ea:	28 2f       	mov	r18, r24
 	/*cnt2++;
@@ -343,7 +343,7 @@ ISR(TIMER0_OVF_vect)
  1f8:	ff 4f       	sbci	r31, 0xFF	; 255
  1fa:	a0 c0       	rjmp	.+320    	; 0x33c <__tablejump2__>
  1fc:	c4 9a       	sbi	0x18, 4	; 24
-	case 0: //¬ Àﬁ◊≈Õ»≈ À≈¬Œ√Œ ƒ¿“◊» ¿
+	case 0: //–í–ö–õ–Æ–ß–ï–ù–ò–ï –õ–ï–í–û–ì–û –î–ê–¢–ß–ò–ö–ê
 		DETECTOR_PORT |= _BV(COM_DETECTOR_OUTPUT_LEFT);
  1fe:	81 e0       	ldi	r24, 0x01	; 1
 		cmd = 1;
@@ -351,7 +351,7 @@ ISR(TIMER0_OVF_vect)
  204:	62 c0       	rjmp	.+196    	; 0x2ca <__vector_9+0x154>
 		break;
  206:	64 e6       	ldi	r22, 0x64	; 100
-	case 1: //Õ»◊≈√Œ Õ≈ ƒ≈À¿“‹
+	case 1: //–ù–ò–ß–ï–ì–û –ù–ï –î–ï–õ–ê–¢–¨
 		if (counter(8)) cmd = 2;
  208:	88 e0       	ldi	r24, 0x08	; 8
  20a:	5d df       	rcall	.-326    	; 0xc6 <_Z7counterhh>
@@ -364,7 +364,7 @@ ISR(TIMER0_OVF_vect)
  21a:	b2 9b       	sbis	0x16, 2	; 22
  21c:	03 c0       	rjmp	.+6      	; 0x224 <__vector_9+0xae>
 		break;
-	case 2: // —◊»“€¬¿≈Õ»≈ »« À≈¬Œ√Œ ƒ¿“◊» ¿
+	case 2: // –°–ß–ò–¢–´–í–ê–ï–ù–ò–ï –ò–ó –õ–ï–í–û–ì–û –î–ê–¢–ß–ò–ö–ê
 		if (DETECTOR_PIN & _BV(COM_DETECTOR_INPUT)) right_wh = true;//ENGINE_PORT |= _BV(ENGINE_RIGHT)
  21e:	81 e0       	ldi	r24, 0x01	; 1
  220:	80 93 62 00 	sts	0x0062, r24
@@ -381,7 +381,7 @@ ISR(TIMER0_OVF_vect)
  238:	c4 98       	cbi	0x18, 4	; 24
 		break;
  23a:	84 e0       	ldi	r24, 0x04	; 4
-	case 3: //¬€ Àﬁ◊≈Õ»≈ À≈¬Œ√Œ ƒ¿“◊» ¿
+	case 3: //–í–´–ö–õ–Æ–ß–ï–ù–ò–ï –õ–ï–í–û–ì–û –î–ê–¢–ß–ò–ö–ê
 		DETECTOR_PORT &= ~(_BV(COM_DETECTOR_OUTPUT_LEFT));
  23c:	80 93 70 00 	sts	0x0070, r24
 		cmd = 4;
