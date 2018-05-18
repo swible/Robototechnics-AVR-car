@@ -55,6 +55,9 @@ volatile uint8_t speed_right = 0;
 volatile uint8_t pwm_left = 0;
 volatile uint8_t pwm_right = 0;
 
+uint8_t desired_speed_left = desired_speed;
+uint8_t desired_speed_right = desired_speed;
+
 void
 configure_pins()
 {
@@ -121,8 +124,8 @@ ISR(TIMER0_OVF_vect)
 	speed_cnt_left = 0;
 	speed_cnt_right = 0;
 
-	pwm_left  += k * (desired_speed - speed_left);
-	pwm_right += k * (desired_speed - speed_right);
+	pwm_left  += k * (desired_speed_left - speed_left);
+	pwm_right += k * (desired_speed_right - speed_right);
 
 	switch(cmd) {
 	case 0: //ÂÊËŞ×ÅÍÈÅ ËÅÂÎÃÎ ÄÀÒ×ÈÊÀ

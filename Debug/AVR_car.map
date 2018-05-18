@@ -196,7 +196,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x348
+.text           0x00000000      0x34c
  *(.vectors)
  .vectors       0x00000000       0x54 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
                 0x00000000                __vector_default
@@ -297,18 +297,18 @@ END GROUP
                 0x00000154       0x22 ./detector.o
                 0x00000154                __vector_2
  .text.__vector_9
-                0x00000176      0x1a8 ./detector.o
+                0x00000176      0x1ac ./detector.o
                 0x00000176                __vector_9
- .text.main     0x0000031e       0x1a ./detector.o
-                0x0000031e                main
- .text.libgcc   0x00000338        0xc d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
-                0x00000338                __tablejump2__
-                0x0000033c                __tablejump__
-                0x00000344                . = ALIGN (0x2)
+ .text.main     0x00000322       0x1a ./detector.o
+                0x00000322                main
+ .text.libgcc   0x0000033c        0xc d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_tablejump.o)
+                0x0000033c                __tablejump2__
+                0x00000340                __tablejump__
+                0x00000348                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000344        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
-                0x00000344                _exit
-                0x00000344                exit
+ .fini9         0x00000348        0x0 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+                0x00000348                _exit
+                0x00000348                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -327,74 +327,80 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000344        0x4 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000348        0x4 d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000348                _etext = .
+                0x0000034c                _etext = .
 
-.data           0x00800060        0x2 load address 0x00000348
+.data           0x00800060        0x4 load address 0x0000034c
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.right_wh
+ .data.desired_speed_right
                 0x00800060        0x1 ./detector.o
-                0x00800060                right_wh
- .data.left_wh  0x00800061        0x1 ./detector.o
-                0x00800061                left_wh
+                0x00800060                desired_speed_right
+ .data.desired_speed_left
+                0x00800061        0x1 ./detector.o
+                0x00800061                desired_speed_left
+ .data.right_wh
+                0x00800062        0x1 ./detector.o
+                0x00800062                right_wh
+ .data.left_wh  0x00800063        0x1 ./detector.o
+                0x00800063                left_wh
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.d*)
-                0x00800062                . = ALIGN (0x2)
-                0x00800062                _edata = .
-                0x00800062                PROVIDE (__data_end, .)
+                0x00800064                . = ALIGN (0x2)
+                0x00800064                _edata = .
+                0x00800064                PROVIDE (__data_end, .)
 
-.bss            0x00800062        0xd
-                0x00800062                PROVIDE (__bss_start, .)
+.bss            0x00800064        0xd
+                0x00800064                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.pwm_right
-                0x00800062        0x1 ./detector.o
-                0x00800062                pwm_right
- .bss.pwm_left  0x00800063        0x1 ./detector.o
-                0x00800063                pwm_left
- .bss.speed_right
                 0x00800064        0x1 ./detector.o
-                0x00800064                speed_right
- .bss.speed_left
-                0x00800065        0x1 ./detector.o
-                0x00800065                speed_left
- .bss.speed_cnt_right
+                0x00800064                pwm_right
+ .bss.pwm_left  0x00800065        0x1 ./detector.o
+                0x00800065                pwm_left
+ .bss.speed_right
                 0x00800066        0x1 ./detector.o
-                0x00800066                speed_cnt_right
- .bss.speed_cnt_left
+                0x00800066                speed_right
+ .bss.speed_left
                 0x00800067        0x1 ./detector.o
-                0x00800067                speed_cnt_left
- .bss.right_engine_run
+                0x00800067                speed_left
+ .bss.speed_cnt_right
                 0x00800068        0x1 ./detector.o
-                0x00800068                right_engine_run
- .bss.left_engine_run
+                0x00800068                speed_cnt_right
+ .bss.speed_cnt_left
                 0x00800069        0x1 ./detector.o
-                0x00800069                left_engine_run
- .bss.cnt2      0x0080006a        0x1 ./detector.o
-                0x0080006a                cnt2
- .bss.cnt1      0x0080006b        0x1 ./detector.o
-                0x0080006b                cnt1
- .bss.cnt0      0x0080006c        0x1 ./detector.o
-                0x0080006c                cnt0
- .bss.detector  0x0080006d        0x1 ./detector.o
-                0x0080006d                detector
- .bss.cmd       0x0080006e        0x1 ./detector.o
-                0x0080006e                cmd
+                0x00800069                speed_cnt_left
+ .bss.right_engine_run
+                0x0080006a        0x1 ./detector.o
+                0x0080006a                right_engine_run
+ .bss.left_engine_run
+                0x0080006b        0x1 ./detector.o
+                0x0080006b                left_engine_run
+ .bss.cnt2      0x0080006c        0x1 ./detector.o
+                0x0080006c                cnt2
+ .bss.cnt1      0x0080006d        0x1 ./detector.o
+                0x0080006d                cnt1
+ .bss.cnt0      0x0080006e        0x1 ./detector.o
+                0x0080006e                cnt0
+ .bss.detector  0x0080006f        0x1 ./detector.o
+                0x0080006f                detector
+ .bss.cmd       0x00800070        0x1 ./detector.o
+                0x00800070                cmd
  *(COMMON)
-                0x0080006f                PROVIDE (__bss_end, .)
-                0x00000348                __data_load_start = LOADADDR (.data)
-                0x0000034a                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800071                PROVIDE (__bss_end, .)
+                0x0000034c                __data_load_start = LOADADDR (.data)
+                0x00000350                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080006f        0x0
-                0x0080006f                PROVIDE (__noinit_start, .)
+.noinit         0x00800071        0x0
+                0x00800071                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x0080006f                PROVIDE (__noinit_end, .)
-                0x0080006f                _end = .
-                0x0080006f                PROVIDE (__heap_start, .)
+                0x00800071                PROVIDE (__noinit_end, .)
+                0x00800071                _end = .
+                0x00800071                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -415,13 +421,13 @@ END GROUP
 .user_signatures
  *(.user_signatures*)
 
-.stab           0x00000000      0xa38
+.stab           0x00000000      0xa50
  *(.stab)
- .stab          0x00000000      0xa38 ./detector.o
+ .stab          0x00000000      0xa50 ./detector.o
 
-.stabstr        0x00000000      0xe41
+.stabstr        0x00000000      0xe78
  *(.stabstr)
- .stabstr       0x00000000      0xe41 ./detector.o
+ .stabstr       0x00000000      0xe78 ./detector.o
 
 .stab.excl
  *(.stab.excl)
@@ -558,6 +564,8 @@ configure_pins()                                  ./detector.o
 configure_timer()                                 ./detector.o
 counter(unsigned char, unsigned char)             ./detector.o
 delay_counter(unsigned char, unsigned char)       ./detector.o
+desired_speed_left                                ./detector.o
+desired_speed_right                               ./detector.o
 detector                                          ./detector.o
 exit                                              d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/avr5\libgcc.a(_exit.o)
                                                   d:/programs/eclipse_c/avr_tools/bin/../lib/gcc/avr/4.8.1/../../../../avr/lib/avr5/crtm16.o
