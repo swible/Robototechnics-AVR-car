@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 # Automatically-generated file. Do not edit!
 ################################################################################
 
@@ -45,47 +45,47 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 LSS += \
-AVR_car.lss \
+AVR.lss \
 
 FLASH_IMAGE += \
-AVR_car.hex \
+AVR.hex \
 
 SIZEDUMMY += \
 sizedummy \
 
 
 # All Target
-all: AVR_car.elf secondary-outputs
+all: AVR.elf secondary-outputs
 
 # Tool invocations
-AVR_car.elf: $(OBJS) $(USER_OBJS)
+AVR.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C++ Linker'
-	avr-g++ -Wl,-Map,AVR_car.map,--cref -mrelax -Wl,--gc-sections -mmcu=atmega16 -o "AVR_car.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	avr-g++ -Wl,-Map,AVR.map,--cref -mrelax -Wl,--gc-sections -mmcu=atmega16 -o "AVR.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-AVR_car.lss: AVR_car.elf
+AVR.lss: AVR.elf
 	@echo 'Invoking: AVR Create Extended Listing'
-	-avr-objdump -h -S AVR_car.elf  >"AVR_car.lss"
+	-avr-objdump -h -S AVR.elf  >"AVR.lss"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-AVR_car.hex: AVR_car.elf
+AVR.hex: AVR.elf
 	@echo 'Create Flash image (ihex format)'
-	-avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex AVR_car.elf  "AVR_car.hex"
+	-avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex AVR.elf  "AVR.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sizedummy: AVR_car.elf
+sizedummy: AVR.elf
 	@echo 'Invoking: Print Size'
-	-avr-size --format=avr --mcu=atmega16 AVR_car.elf
+	-avr-size --format=avr --mcu=atmega16 AVR.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C_UPPER_DEPS)$(S_DEPS)$(LSS)$(C_DEPS)$(FLASH_IMAGE)$(CC_DEPS)$(ELFS)$(C++_DEPS)$(OBJS)$(CXX_DEPS)$(ASM_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(CPP_DEPS) AVR_car.elf
+	-$(RM) $(C_UPPER_DEPS)$(S_DEPS)$(LSS)$(C_DEPS)$(FLASH_IMAGE)$(CC_DEPS)$(ELFS)$(C++_DEPS)$(OBJS)$(CXX_DEPS)$(ASM_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS)$(CPP_DEPS) AVR.elf
 	-@echo ' '
 
 secondary-outputs: $(LSS) $(FLASH_IMAGE) $(SIZEDUMMY)
