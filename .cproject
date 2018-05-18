@@ -52,6 +52,9 @@
 							<tool id="de.innot.avreclipse.tool.avrdude.app.debug.860401494" name="AVRDude" superClass="de.innot.avreclipse.tool.avrdude.app.debug"/>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="de.innot.avreclipse.configuration.app.debug.557665899.1155729596" name="detector.cpp" rcbsApplicability="disable" resourcePath="detector.cpp" toolsToInvoke="de.innot.avreclipse.tool.cppcompiler.app.debug.1999440130.1236658096">
+						<tool id="de.innot.avreclipse.tool.cppcompiler.app.debug.1999440130.1236658096" name="AVR C++ Compiler" superClass="de.innot.avreclipse.tool.cppcompiler.app.debug.1999440130"/>
+					</fileInfo>
 					<sourceEntries>
 						<entry excluding="Source.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
