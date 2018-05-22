@@ -38,8 +38,8 @@
 #define dt 1
 
 volatile uint8_t cmd = 0;
-volatile bool left_wh = 1;
-volatile bool right_wh = 1;
+volatile bool left_ob = 1;
+volatile bool right_ob = 1;
 volatile uint8_t detector = 0;
 volatile uint8_t cnt0 = 0;
 volatile uint8_t cnt1 = 0;
@@ -102,14 +102,14 @@ delay_counter(uint8_t target) //ФУНКЦИЯ ОБНУЛЕНИЯ СЧЁТЧИК
 	/*if (cnt2 > max) cnt2 = 0;
 	return cnt2++ > target;*/
 
-	if(remove_counter) {
+		if (cnt0 > target){
 			cnt0 = 0;
-			remove_counter = false;
+			return true;
 		}
 
-		if (cnt0 > target) remove_counter = true;
+		cnt0++;
 
-		return cnt0++ > target;
+		return false;
 }
 
 bool
@@ -147,15 +147,20 @@ ISR(TIMER0_OVF_vect)
 	pwm_left  += k * (desired_speed_left - speed_left);
 	pwm_right += k * (desired_speed_right - speed_right);*/
 
+	uint8_t c;
+
 	switch(cmd) {
 	case 0: //ВКЛЮЧЕНИЕ ЛЕВОГО ДАТЧИКА
 
 		DETECTOR_PORT |= _BV(COM_DETECTOR_OUTPUT_LEFT);
 
-		cmd = 1;
-
 		pwm_left = 10;
 		pwm_right = 10;
+
+		right_ob = false;
+		left_ob = false;
+
+		cmd = 1;
 
 		break;
 
@@ -165,25 +170,16 @@ ISR(TIMER0_OVF_vect)
 
 		break;
 
-	case 2: // СЧИТЫВАЕНИЕ ИЗ ЛЕВОГО ДАТЧИКА
-		/*if (DETECTOR_PIN & _BV(COM_DETECTOR_INPUT)) right_wh = true;//ENGINE_PORT |= _BV(ENGINE_RIGHT)
-		//if (detector == 0b00000100) right_wh = true;
-		if(!right_wh) right_engine_run = false;
-		cmd = 3;*/
+	case 2: // СЧИТЫВАЕНИЕ ИЗ ЛЕВОГО ДАТЧИКA
 
-		if (DETECTOR_PIN & _BV(COM_DETECTOR_INPUT)) right_wh = true;
+		c = 0;
+		for (int i = 0; i < 10; ++i) {
+			if (DETECTOR_PIN & _BV(COM_DETECTOR_INPUT)) c++;
+		}
 
-						if(!right_wh) {
-							pwm_left = 20;
-							pwm_right = 0;
-						}
+		if(c > 7) right_ob = true;
 
-						cmd = 3;
-						/*if(delay_counter(pwm_left) && !right_wh) {
-									pwm_left = 10;
-									pwm_right = 10;
-									cmd = 3;
-								}*/
+		cmd = 3;
 
 		break;
 
@@ -191,54 +187,54 @@ ISR(TIMER0_OVF_vect)
 		DETECTOR_PORT &= ~(_BV(COM_DETECTOR_OUTPUT_LEFT));
 		cmd = 4;
 		break;
+
 	case 4:
 		DETECTOR_PORT |= _BV(COM_DETECTOR_OUTPUT_RIGHT);
 		cmd = 5;
 		break;
+
 	case 5:
 		if(delay_counter(8)) cmd = 6;
 		break;
-	case 6:
-		if (DETECTOR_PIN & _BV(COM_DETECTOR_INPUT)) left_wh = true;
-		/*//if (detector == 0b00000100) left_wh = true;
-		if(!left_wh) left_engine_run = false;
-		cmd = 7;*/
 
-		if(!left_wh) {
-					pwm_left = 0;
-					if(pwm_right != 0) pwm_right = 20;
-				}
+	case 6:
+		c = 0;
+		for (int i = 0; i < 10; ++i) {
+			if (DETECTOR_PIN & _BV(COM_DETECTOR_INPUT)) c++;
+		}
+
+		if(c > 7) left_ob = true;
+
 		cmd = 7;
 
-								/*if(delay_counter(8) && !left_wh) {
-											pwm_left = 10;
-											pwm_right = 10;
-											cmd = 7;
-										}*/
-
 		break;
+
 	case 7:
 		DETECTOR_PORT &= ~(_BV(COM_DETECTOR_OUTPUT_RIGHT));
 		cmd = 8;
 		break;
+
 	case 8:
-		/*if(left_wh) {
-			left_engine_run = true;
-			//ENGINE_PORT |= _BV(ENGINE_LEFT);
+		if(!right_ob && left_ob) {
+			pwm_left = 20;
+			pwm_right = 0;
 		}
-		if(right_wh) {
-			right_engine_run = true;
-			//ENGINE_PORT |= _BV(ENGINE_RIGHT);
+
+		if(right_ob && !left_ob) {
+			pwm_left = 0;
+			pwm_right = 20;
 		}
-		if(delay_counter(pwm_left)) {
-			cmd = 0;
-			left_wh = false;
+
+		if(!right_ob && !left_ob) {
+			pwm_left = 0;
+			pwm_right = 0;
 		}
-		if (delay_counter(pwm_right))
-		{
-			cmd = 0;
-			right_wh = false;
-		}*/
+
+		cmd = 9;
+
+		break;
+
+	case 9:
 
 		if (!pwm_counter_left(pwm_left)) ENGINE_PORT |= _BV(ENGINE_LEFT);
 		else ENGINE_PORT &= ~_BV(ENGINE_LEFT);
@@ -246,15 +242,10 @@ ISR(TIMER0_OVF_vect)
 		if (!pwm_counter_right(pwm_right)) ENGINE_PORT |= _BV(ENGINE_RIGHT);
 		else ENGINE_PORT &= ~_BV(ENGINE_RIGHT);
 
-		if(delay_counter(100) && (!right_wh || !left_wh)) cmd = 0;
+		if(delay_counter(100) && (!right_ob || !left_ob)) cmd = 0;
 		else cmd = 0;
 
 	}
-	/*if (left_engine_run & pwm_counter(pwm_left)) ENGINE_PORT |= _BV(ENGINE_LEFT);
-	else ENGINE_PORT &= ~_BV(ENGINE_LEFT);
-
-	if (right_engine_run & pwm_counter(pwm_right)) ENGINE_PORT |= _BV(ENGINE_RIGHT);
-	else ENGINE_PORT &= ~_BV(ENGINE_RIGHT);*/
 }
 
 int
