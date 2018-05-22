@@ -32,10 +32,10 @@
 
 #define INPUT_PIN PINA
 
-#define pi 3.14
-#define desired_speed 30
-#define k 1
-#define dt 1
+#define desired_speed 0.5
+#define k 0.013
+#define dt 122
+#define tubrik
 
 volatile uint8_t cmd = 0;
 volatile bool left_ob = 1;
@@ -54,13 +54,13 @@ volatile uint8_t timer_cnt = 0;
 volatile uint8_t speed_left = 0;
 volatile uint8_t speed_right = 0;
 
-volatile uint8_t pwm_left = 0;
-volatile uint8_t pwm_right = 0;
+volatile int pwm_left = 0;
+volatile int pwm_right = 0;
 
 volatile bool remove_counter = 0;
 
-uint8_t desired_speed_left = desired_speed;
-uint8_t desired_speed_right = desired_speed;
+volatile double desired_speed_left = desired_speed;
+volatile double desired_speed_right = desired_speed;
 
 void
 configure_pins()
@@ -113,14 +113,14 @@ delay_counter(uint8_t target) //ФУНКЦИЯ ОБНУЛЕНИЯ СЧЁТЧИК
 }
 
 bool
-pwm_counter_left(uint8_t target, uint8_t max = 20)
+pwm_counter_left(uint8_t target, uint8_t max = 30)
 {
 	if (cnt1 > max) cnt1 = 0;
 	return cnt1++ > target;
 }
 
 bool
-pwm_counter_right(uint8_t target, uint8_t max = 20)
+pwm_counter_right(uint8_t target, uint8_t max = 10)
 {
 	if (cnt2 > max) cnt2 = 0;
 	return cnt2++ > target;
@@ -144,8 +144,15 @@ ISR(TIMER0_OVF_vect)
 	speed_cnt_left = 0;
 	speed_cnt_right = 0;
 
-	pwm_left  += k * (desired_speed_left - speed_left);
-	pwm_right += k * (desired_speed_right - speed_right);*/
+	if (desired_speed_left - (speed_left*k) < 0) pwm_left--;
+	if (desired_speed_left - (speed_left*k) > 0) pwm_left++;
+	if(desired_speed_left == 0) pwm_left = 0;
+
+	if (desired_speed_right - (speed_right*k) < 0) pwm_right--;
+	if (desired_speed_right - (speed_right*k) > 0) pwm_right++;
+	if(desired_speed_right == 0) pwm_right = 0;
+
+	pwm_right == desired_speed_left - k * speed_right;*/
 
 	uint8_t c;
 
@@ -216,18 +223,35 @@ ISR(TIMER0_OVF_vect)
 
 	case 8:
 		if(!right_ob && left_ob) {
-			pwm_left = 20;
+			pwm_left = 10;
 			pwm_right = 0;
+
+			/*desired_speed_left = 1;
+			desired_speed_right = 0;*/
 		}
 
 		if(right_ob && !left_ob) {
 			pwm_left = 0;
-			pwm_right = 20;
+			pwm_right = 10;
+
+			/*desired_speed_left = 0;
+			desired_speed_right = 1;*/
 		}
 
 		if(!right_ob && !left_ob) {
 			pwm_left = 0;
 			pwm_right = 0;
+
+			/*desired_speed_left = 0;
+			desired_speed_right = 0;*/
+		}
+
+		if(right_ob && left_ob) {
+			pwm_left = 5;
+			pwm_right = 5;
+
+			/*desired_speed_left = 0.5;
+			desired_speed_right = 0.5;*/
 		}
 
 		cmd = 9;
