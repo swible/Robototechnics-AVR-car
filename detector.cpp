@@ -32,10 +32,10 @@
 
 #define INPUT_PIN PINA
 
-#define desired_speed 0.5
+#define desired_speed 0.5 //1 метр в секунду - максимальная скорость
+#define desired_speed_pwm desired_speed/(0.026)
 #define k 0.013
-#define dt 122
-#define tubrik
+#define p 61
 
 volatile uint8_t cmd = 0;
 volatile bool left_ob = 1;
@@ -57,10 +57,13 @@ volatile uint8_t speed_right = 0;
 volatile int pwm_left = 0;
 volatile int pwm_right = 0;
 
-volatile bool remove_counter = 0;
+volatile bool remove_= 0;
 
-volatile double desired_speed_left = desired_speed;
-volatile double desired_speed_right = desired_speed;
+volatile uint8_t desired_speed_left = (uint8_t) desired_speed_pwm;
+volatile uint8_t desired_speed_right = (uint8_t) desired_speed_pwm;
+
+volatile int E_left = 0;
+volatile int E_right = 0;
 
 void
 configure_pins()
@@ -82,14 +85,31 @@ configure_timer()
 }
 
 bool
-counter(uint8_t target, uint8_t max = 100) //ФУНКЦИЯ ОБНУЛЕНИЯ СЧЁТЧИКА
+counter(uint8_t target) //ФУНКЦИЯ ОБНУЛЕНИЯ СЧЁТЧИКА
 {
-	/*cnt0++;
-	if (cnt0 == 10) cnt0 = 0;
-	return cnt0;*/
+	if (cnt0 > target)
+	{
+		cnt0 = 0;
+		return true;
+	}
 
-	if (cnt0 > max) cnt0 = 0;
-	return cnt0++ > target;
+	cnt0++;
+
+	return false;
+}
+
+uint8_t minimax_left(uint8_t min, uint8_t max, int error)
+{
+	int pwm = 0;
+	pwm += error;
+	return pwm;
+}
+
+uint8_t minimax_right(uint8_t min, uint8_t max, int error)
+{
+	int pwm = 0;
+	pwm += error;
+	return pwm;
 }
 
 bool
@@ -102,7 +122,8 @@ delay_counter(uint8_t target) //ФУНКЦИЯ ОБНУЛЕНИЯ СЧЁТЧИК
 	/*if (cnt2 > max) cnt2 = 0;
 	return cnt2++ > target;*/
 
-		if (cnt0 > target){
+		if (cnt0 > target)
+		{
 			cnt0 = 0;
 			return true;
 		}
@@ -113,14 +134,14 @@ delay_counter(uint8_t target) //ФУНКЦИЯ ОБНУЛЕНИЯ СЧЁТЧИК
 }
 
 bool
-pwm_counter_left(uint8_t target, uint8_t max = 30)
+pwm_counter_left(uint8_t target, uint8_t max = 40)
 {
 	if (cnt1 > max) cnt1 = 0;
 	return cnt1++ > target;
 }
 
 bool
-pwm_counter_right(uint8_t target, uint8_t max = 10)
+pwm_counter_right(uint8_t target, uint8_t max = 40)
 {
 	if (cnt2 > max) cnt2 = 0;
 	return cnt2++ > target;
@@ -136,6 +157,7 @@ ISR(INT1_vect)
 	speed_cnt_right++;
 }
 
+
 ISR(TIMER0_OVF_vect)
 {
 	/*speed_left = speed_cnt_left * dt;
@@ -144,7 +166,16 @@ ISR(TIMER0_OVF_vect)
 	speed_cnt_left = 0;
 	speed_cnt_right = 0;
 
+	P = minimax(0, 10, E * K1 + SE * K2);
+	SE += E;                    ^^^^^^^^
+
+		P 0  10  10  10        10   2   2   1
+	E 0 100  90  80  70 60 20  18  16  14
+	V 0   0  10            80  82  84  85
+ 	a 0  10  10            10   2   2   1
+
 	if (desired_speed_left - (speed_left*k) < 0) pwm_left--;
+	    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ОШИБКА (Е)
 	if (desired_speed_left - (speed_left*k) > 0) pwm_left++;
 	if(desired_speed_left == 0) pwm_left = 0;
 
@@ -152,7 +183,32 @@ ISR(TIMER0_OVF_vect)
 	if (desired_speed_right - (speed_right*k) > 0) pwm_right++;
 	if(desired_speed_right == 0) pwm_right = 0;
 
-	pwm_right == desired_speed_left - k * speed_right;*/
+	pwm_right == desired_speed_left - k * speed_right;
+
+
+
+
+
+	E = desired_speed_left - sp
+
+	*/
+
+	if(counter(61))
+	{
+		speed_left = speed_cnt_left;
+		speed_right = speed_cnt_right;
+
+		speed_cnt_left = 0;
+		speed_cnt_right = 0;
+
+		E_left = desired_speed_left - speed_left;
+		E_right = desired_speed_right - speed_right;
+
+		pwm_left += E_left;
+		pwm_right += E_right;
+
+		//GNU PLOT, GRAPHVIZ
+	}
 
 	uint8_t c;
 
@@ -179,8 +235,8 @@ ISR(TIMER0_OVF_vect)
 
 	case 2: // СЧИТЫВАЕНИЕ ИЗ ЛЕВОГО ДАТЧИКA
 
-		c = 0;
-		for (int i = 0; i < 10; ++i) {
+		int c = 0;
+		for (int i = 0; i < 10; i++) {
 			if (DETECTOR_PIN & _BV(COM_DETECTOR_INPUT)) c++;
 		}
 
@@ -203,7 +259,6 @@ ISR(TIMER0_OVF_vect)
 	case 5:
 		if(delay_counter(8)) cmd = 6;
 		break;
-
 	case 6:
 		c = 0;
 		for (int i = 0; i < 10; ++i) {
@@ -254,22 +309,15 @@ ISR(TIMER0_OVF_vect)
 			desired_speed_right = 0.5;*/
 		}
 
-		cmd = 9;
+		cmd = 0;
 
 		break;
-
-	case 9:
-
-		if (!pwm_counter_left(pwm_left)) ENGINE_PORT |= _BV(ENGINE_LEFT);
-		else ENGINE_PORT &= ~_BV(ENGINE_LEFT);
-
-		if (!pwm_counter_right(pwm_right)) ENGINE_PORT |= _BV(ENGINE_RIGHT);
-		else ENGINE_PORT &= ~_BV(ENGINE_RIGHT);
-
-		if(delay_counter(100) && (!right_ob || !left_ob)) cmd = 0;
-		else cmd = 0;
-
 	}
+	if (!pwm_counter_left(pwm_left)) ENGINE_PORT |= _BV(ENGINE_LEFT);
+	else ENGINE_PORT &= ~_BV(ENGINE_LEFT);
+
+	if (!pwm_counter_right(pwm_right)) ENGINE_PORT |= _BV(ENGINE_RIGHT);
+	else ENGINE_PORT &= ~_BV(ENGINE_RIGHT);
 }
 
 int
