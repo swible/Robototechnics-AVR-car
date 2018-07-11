@@ -1,2 +1,4 @@
 #Игнорируем директории, присущие Eclipse
 /.settings/
+/Debug/
+/Release/
