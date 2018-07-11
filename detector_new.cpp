@@ -64,8 +64,8 @@ ISR(INT1_vect)
 	speed_cnt_right++;
 }
 
-bool
-counter(uint8_t target) //ФУНКЦИЯ ОБНУЛЕНИЯ СЧЁТЧИКА
+/*bool
+counter(uint8_t target)
 {
 	if (cnt0 > target)
 	{
@@ -76,10 +76,10 @@ counter(uint8_t target) //ФУНКЦИЯ ОБНУЛЕНИЯ СЧЁТЧИКА
 	cnt0++;
 
 	return false;
-}
+}*/
 
 bool
-delay_counter(uint8_t target) //ФУНКЦИЯ ОБНУЛЕНИЯ СЧЁТЧИКА
+delay_counter(uint8_t target)
 {
 		if (cnt0 > target)
 		{
